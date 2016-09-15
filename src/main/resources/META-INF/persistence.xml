@@ -3,6 +3,8 @@
   <persistence-unit name="ceaotPU" transaction-type="JTA">
     <jta-data-source>jdbc/ceaotDS</jta-data-source>
     <class>com.ceaot.entity.Users</class>
+    <class>com.ceaot.entity.Comment</class>
+    <class>com.ceaot.entity.Item</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>

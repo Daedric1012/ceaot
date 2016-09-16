@@ -16,8 +16,8 @@ import java.util.*;
 @Entity
 @NamedQueries({
     //used to check a login.
-    @NamedQuery(name = "LoginQuery", query = "SELECT c FROM Users c WHERE c.username = :uname"),
-    @NamedQuery(name = "UserByUserName", query = "SELECT c FROM Users c WHERE c.username = :uname"),
+    @NamedQuery(name = "FindUserQuery", query = "SELECT c FROM Users c WHERE c.username = :uname"),
+    //not needed for now but may way want this for something later.
     @NamedQuery(name = "EmailQuery", query = "SELECT c FROM Users c WHERE c.emailAddress = :email")
 })
 public class Users implements Serializable {

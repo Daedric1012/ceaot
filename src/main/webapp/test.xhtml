@@ -4,19 +4,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>start working</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body>
-        <form id="temp">
+    <h:body>
+        <h:form id="temp">
             <div>
                 <p>stuff</p>
-                <outputText value="Welcome: "/>
-                <commandButton value="test" action="#{UserController.run()}"/>
+                <h:outputText value="Welcome: "/>
+                <h:commandButton value="test" action="#{UserController.run()}"/>
             </div>
-        </form>
-    </body>
+        </h:form>
+    </h:body>
 
 </html>

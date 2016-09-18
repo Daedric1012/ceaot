@@ -16,11 +16,20 @@ import javax.faces.context.FacesContext;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author stephankranenfeld
  */
+@Named(value = "UserController")
+//session timeout is set to 30 minutes.
+@SessionScoped
+//this controller is set to session so it stays with the user while they brows the sight.
+//it also handles login and registration for users.
+//it will not handle retriving random users or messages to avoid buildup of junk on
+//a sessionScopped item. my attempt to keep memory use down.
 public class UserController implements Serializable {
 
     // sets up the UserEJB

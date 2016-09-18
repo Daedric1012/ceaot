@@ -8,7 +8,7 @@ package com.ceaot.controller;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import com.ceaot.ejb.UserEJB;
-import com.ceaot.entity.Users;
+import com.ceaot.entity.Collector;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import javax.faces.application.FacesMessage;
@@ -16,46 +16,58 @@ import javax.faces.context.FacesContext;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author stephankranenfeld
  */
-public class UserController implements Serializable {
+@Named(value = "userController")
+@RequestScoped
+public class UserController {
 
     // sets up the UserEJB
-    @EJB
+    @Inject
     private UserEJB userEJB;
 
     //to test usr creation
     public String run() {
         FacesContext ctx = FacesContext.getCurrentInstance();
 
-        Users u = new Users();
-        u.setFirstName("test");
-        u.setLastName("test");
-        u.setEmailAddress("test");
-        u.setUsername("test");
+        Collector c = new Collector();
+        c.setFirstName("test");
+        c.setLastName("test");
+        c.setEmailAddress("test");
+        c.setUsername("test");
+        c.setPhoneNumber("test");
+        c.setPassword("test");
 
-        try {
+      /*  try {
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
             byte[] salt = new byte[8];
             random.nextBytes(salt);
-            u.setPassword(salt);
-        } catch (NoSuchAlgorithmException e) {
+            c.setPassword(salt);
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Salt failed ", ""));
+        return "errorpage.xhtml";
 
         }
-
+*/
         try {
-            userEJB.createUser(u);
+            userEJB.createCollector(c);
         } catch (Exception e) {
-            return "errorpage.xhtml";
+            ctx.addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to create new collector "+e, ""));
+        return "errorpage.xhtml";
         }
 
         FacesMessage msg = new FacesMessage("worked", "worked");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         ctx.addMessage("registerForum", msg);
-        
+
         return null;
 
     }

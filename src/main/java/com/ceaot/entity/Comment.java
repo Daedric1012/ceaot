@@ -19,28 +19,28 @@ public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long commentId; // uniqe key for each user and used as FK in other tables
+    private Long id; // uniqe key for each user and used as FK in other tables
     
     @ManyToOne
-    private Users owner;
+    private Collector owner;
     
     //length changed to 250 because 50 just isn't enough for a proper comment.
     @Column(length = 250, nullable = false)
     private String comment;
 
-    public Long getCommentId() {
-        return commentId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
+    public void setCommentId(Long id) {
+        this.id = id;
     }
 
-    public Users getOwner() {
+    public Collector getOwner() {
         return owner;
     }
 
-    public void setOwner(Users owner) {
+    public void setOwner(Collector owner) {
         this.owner = owner;
     }
 

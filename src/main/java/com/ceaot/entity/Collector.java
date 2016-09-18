@@ -16,11 +16,11 @@ import java.util.*;
 @Entity
 @NamedQueries({
     //used to check a login.
-    @NamedQuery(name = "FindUserQuery", query = "SELECT c FROM Users c WHERE c.username = :uname"),
+    @NamedQuery(name = "FindCollectorQuery", query = "SELECT c FROM Collector c WHERE c.username = :uname"),
     //not needed for now but may way want this for something later.
-    @NamedQuery(name = "EmailQuery", query = "SELECT c FROM Users c WHERE c.emailAddress = :email")
+    @NamedQuery(name = "EmailQuery", query = "SELECT c FROM Collector c WHERE c.emailAddress = :email")
 })
-public class Users implements Serializable {
+public class Collector implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,13 +34,13 @@ public class Users implements Serializable {
     private String firstName;
     
     @Column(length = 10, nullable = false)
-    private String LastName;
+    private String lastName;
 
     @Column(nullable = false)
-    private byte[] password;
+    private String password;
     
-    @Column(nullable = false)
-    private byte[] salt;
+   // @Column(nullable = false)
+   // private byte[] salt;
     
     @Column(nullable = false)
     private String phoneNumber;
@@ -51,6 +51,9 @@ public class Users implements Serializable {
     private Boolean isAdmin = false;// must be true to access admin controlls set on pages
 
     private Boolean loggedIn = false;// makes sure only 1 user is logged in at a time.
+    
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Item> items;
 
     public Long getId() {
         return id;
@@ -64,22 +67,22 @@ public class Users implements Serializable {
         this.username = username;
     }
 
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public byte[] getSalt() {
+  /*  public byte[] getSalt() {
         return salt;
     }
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
-
+*/
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -121,11 +124,11 @@ public class Users implements Serializable {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     
     

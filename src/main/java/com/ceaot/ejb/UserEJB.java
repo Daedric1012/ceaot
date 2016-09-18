@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
 import javax.persistence.NoResultException;
 
-import com.ceaot.entity.Users;
+import com.ceaot.entity.Collector;
 
 /**
  *
@@ -35,22 +35,22 @@ public class UserEJB {
     SessionContext ctx;
     
     //creates the user
-    public Users createUser(Users usr){
+    public Collector createCollector(Collector usr){
         em.persist(usr);
         return usr;
     }
     
     //updates the user
-    public void updateUser(Users usr){
+    public void updateCollector(Collector usr){
         em.merge(usr);
     }
     
     //gets the user by usrname.
-    public Users loggingIn(String usrN){
-        TypedQuery<Users> query = em.createNamedQuery("FindUserQuery", Users.class);
+    public Collector loggingIn(String usrN){
+        TypedQuery<Collector> query = em.createNamedQuery("FindCollectorQuery", Collector.class);
         query.setParameter("uname", usrN);
         try{
-        Users usr = query.getSingleResult();
+        Collector usr = query.getSingleResult();
         return usr;
         } catch (NoResultException e){
             //might change this to throw an exception to catch on the higher level.

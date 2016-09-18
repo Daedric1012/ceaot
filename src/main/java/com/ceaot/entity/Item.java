@@ -19,12 +19,15 @@ public class Item implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long itemId; // uniqe key for each user and used as FK in other tables
+    private Long id; // uniqe key for each user and used as FK in other tables
     
     @ManyToOne
-    private Users owner;
+    private Collector owner;
     
-    @OneToMany
-    private List<Users> interestedIn;
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Collector> interestedIn;
     
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> comments;
+
 }

@@ -7,7 +7,7 @@
         <property name="databaseName" value="ceaotDB"/>
         <property name="User" value="app"/>
         <property name="Password" value="app"/>
-        <property name="URL" value="jdbc:derby://localhost:1527/ceaotDB"/>
+        <property name="URL" value="jdbc:derby://localhost:1527/ceaotDB;create=true;"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/ceaotDB" object-type="user" pool-name="derby_net_ceaotDB_appPool"/>

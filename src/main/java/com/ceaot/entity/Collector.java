@@ -36,11 +36,11 @@ public class Collector implements Serializable {
     @Column(length = 10, nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
-    private String password;
+    //@Column(nullable = false)
+    private byte[] password;
     
    // @Column(nullable = false)
-   // private byte[] salt;
+    private byte[] salt;
     
     @Column(nullable = false)
     private String phoneNumber;
@@ -67,22 +67,22 @@ public class Collector implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 
-  /*  public byte[] getSalt() {
+    public byte[] getSalt() {
         return salt;
     }
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
-*/
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

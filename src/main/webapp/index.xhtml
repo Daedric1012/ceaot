@@ -10,7 +10,8 @@
         <ui:define name="content">
             <h:form>            
                 <h:outputText value="Welcome: "/>
-                <h:commandButton value="test" action="#{userController.run()}"/>
+                <h:inputText id="username" value="#{userController.userName}" required="true"/>
+                <h:commandButton value="test" action="#{userController.register()}"/>
             </h:form> 
         </ui:define>
     </ui:composition>

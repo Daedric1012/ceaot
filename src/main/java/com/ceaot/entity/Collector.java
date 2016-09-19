@@ -54,11 +54,31 @@ public class Collector implements Serializable {
     
     @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Item> items;
+    
+    //this is comments from other users onto the users home page eg: "good collecter, honest and quick to respond"
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> commentsAboutMe;
 
     public Long getId() {
         return id;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public List<Comment> getcommentsAboutMe() {
+        return commentsAboutMe;
+    }
+
+    public void setcommentsAboutMe(List<Comment> commentsAboutMe) {
+        this.commentsAboutMe = commentsAboutMe;
+    }
+    
     public String getUsername() {
         return username;
     }

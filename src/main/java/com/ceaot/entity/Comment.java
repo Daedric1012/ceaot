@@ -21,6 +21,7 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // uniqe key for each user and used as FK in other tables
     
+    //each comment can only have 1 owner but collector can have multiple comments
     @ManyToOne
     private Collector owner;
     

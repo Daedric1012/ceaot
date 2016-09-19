@@ -14,26 +14,31 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author stephankranenfeld
  */
 @Named(value = "userController")
-@RequestScoped
-public class UserController {
+@SessionScoped
+public class UserController implements Serializable {
 
     // sets up the UserEJB
     @Inject
     private UserEJB userEJB;
+    
     //user entered values
     private String userName;
     private String firstName;
@@ -42,6 +47,13 @@ public class UserController {
     private String phoneNumber;
     private String password;
     private byte[] encryptedPass;
+    
+    //set only when user is logged in
+    private Collector usr;
+    //used to handle sorting people who ar logged in or out.
+    //this allows showing different controls when someone is logged in or out
+    private boolean loggedIn = false;
+    
 
     //to test usr creation
     public String register() {
@@ -56,7 +68,7 @@ public class UserController {
 
             byte[] salt = generateSalt();
             //will throw null pointer if password is not set. please remember this!
-            encryptedPass = getEncryptedPassword(password, salt);
+            encryptedPass = getEncryptedPassword(userName, salt);
 
             c.setSalt(salt);
             c.setPassword(encryptedPass);
@@ -81,6 +93,35 @@ public class UserController {
 
     }
 
+    public String login(){
+        try{
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            usr = userEJB.loggingIn(userName);
+            if(usr == null){//if no usr with username is found return this.
+                ctx.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
+                return null;
+            }else if (usr.getPassword() == getEncryptedPassword(password, usr.getSalt())) {// checks the password matches.
+                loggedIn = true;
+                usr.setLoggedIn(loggedIn);
+                return null;
+            }else{//if username is found but no password. same error message returned.
+                ctx.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
+            }
+        }catch (InvalidKeySpecException | NoSuchAlgorithmException e){
+            
+        }
+        return null;
+    }
+    
+    //clears the session details. before deltion. if set so only 
+    //@PreDestroy
+    public String logout(){
+        loggedIn = false;
+        usr = null;
+        return null;
+    }
     
     //<editor-fold defaultstate="collapsed" desc="used for password encryption">
     public boolean authenticate(String attempt, byte[] encryptedPassword, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
@@ -114,6 +155,23 @@ public class UserController {
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="getters and setters for the xhtml code to use.">
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public Collector getUsr() {
+        return usr;
+    }
+
+    public void setUsr(Collector usr) {
+        this.usr = usr;
+    }
+    
     public UserEJB getUserEJB() {
         return userEJB;
     }

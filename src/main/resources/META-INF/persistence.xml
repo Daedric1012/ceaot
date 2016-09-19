@@ -11,7 +11,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ceaotDB;create=true;"/>
       <property name="javax.persistence.jdbc.user" value="app"/>
       <property name="javax.persistence.jdbc.password" value="app"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

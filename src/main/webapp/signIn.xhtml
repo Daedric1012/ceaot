@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="layout.xhtml">
+        <ui:define name="title">Sign In</ui:define>
+        <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;Sign In</ui:define>
+        <ui:define name="content">
+            <h:form>            
+                <h:outputText value="Sign In "/>
+                <h:inputText id="username" value="#{collectorController.userName}" required="true"/>
+                <h:commandButton value="test" action="#{collectorController.register()}"/>
+                
+                <!-- use this to give the request scopes the user details of the collector-->
+                <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
+            </h:form> 
+        </ui:define>
+    </ui:composition>
+</html>

@@ -6,16 +6,30 @@
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="layout.xhtml">
-        <ui:define name="title">Start Page</ui:define>
+        <ui:define name="title">Home Page</ui:define>
+        <ui:define name="navigation">&gt;Home Page</ui:define>
         <ui:define name="content">
-            <h:form>            
-                <h:outputText value="Welcome: "/>
-                <h:inputText id="username" value="#{collectorController.userName}" required="true"/>
-                <h:commandButton value="test" action="#{collectorController.register()}"/>
-                
-                <!-- use this to give the request scopes the user details of the collector-->
-                <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
-            </h:form> 
+            
+                 <h:form>            
+                    <h:outputText value="Search "/>
+                    <h:inputText id="username" value="#{itemController.searchString}" required="true"/>
+                    <h:selectOneMenu value="#{itemController.category}">
+                        <f:selectItem itemValue="All" itemLabel="All Categories" />
+                        <f:selectItem itemValue="Auto" itemLabel="Auto" />
+                        <f:selectItem itemValue="Antiques" itemLabel="Antiques" />
+                        <f:selectItem itemValue="Dolls" itemLabel="Dolls" />
+                        <f:selectItem itemValue="Models" itemLabel="Models" />
+                    </h:selectOneMenu>
+                    <h:button value="Sign In" outcome='signIn'/>
+                    <br/>
+                    <h:commandButton value="Search by Item Number" action="#{itemController.searchByNum()}"/>
+                    <h:commandButton value="search by Description" action="#{itemController.searchByDescription()}"/>
+                    <h:button value='Create Account' outcome='register'/>
+
+                    <!-- use this to give the request scopes the user details of the collector-->
+                    <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
+                </h:form> 
+            
         </ui:define>
     </ui:composition>
 </html>

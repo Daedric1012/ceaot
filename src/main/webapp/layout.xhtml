@@ -5,12 +5,63 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
+        <style>
+            div.container {
+                margin: auto;
+                width: 70%;
+                border: 1px solid gray;
+               
+                
+
+            }
+
+            header {
+                padding: 1em;
+                color: black;
+                background-color: lightcyan;
+                clear: left;
+                text-align: center;
+            }
+
+            nav {
+                float: top;
+                margin: 0;
+                padding: 1em;
+
+
+            nav a {
+                text-decoration: none;
+                color: black;
+            }
+
+            article {
+                width: 200px;
+                margin: auto;
+               
+                
+                padding: 1em;
+                overflow: hidden;
+            }
+        </style>
     </h:head>
-    <h:body style="background-color: lightgrey">
-        <h1 style="background-color: lightblue; color: black"><ui:insert name="title">Default Title</ui:insert></h1>
-        <hr/>
-        <h:messages id="errors" infoStyle="color:blue" warnStyle="color:orange" errorStyle="color:red"/>
-        <ui:insert name="content">Default content</ui:insert>
+    <h:body>
+
+        <div class="container">
+
+            <header>
+                <h1>Collection Community's Display and Sales System</h1>
+            </header>
+            <nav><ui:insert name='navigation'>Default Navigation</ui:insert></nav>
+            <h:messages id="errors" infoStyle="color:blue" warnStyle="color:orange" errorStyle="color:red"/>
+           
+
+            <article>
+                <ui:insert name="content">Default content</ui:insert>
+            </article>
+
+
+
+        </div>
     </h:body>
 </html>
 

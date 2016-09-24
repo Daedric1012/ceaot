@@ -26,7 +26,7 @@ import com.ceaot.entity.Collector;
 
 @Stateless
 @LocalBean
-public class UserEJB {
+public class CollectorEJB {
     
     //persistent unit setup
     @PersistenceContext(unitName = "ceaotPU")
@@ -35,14 +35,14 @@ public class UserEJB {
     SessionContext ctx;
     
     //creates the user
-    public Collector createCollector(Collector usr){
-        em.persist(usr);
-        return usr;
+    public Collector createCollector(Collector cltr){
+        em.persist(cltr);
+        return cltr;
     }
     
     //updates the user
-    public void updateCollector(Collector usr){
-        em.merge(usr);
+    public void updateCollector(Collector cltr){
+        em.merge(cltr);
     }
     
     //gets the user by usrname.

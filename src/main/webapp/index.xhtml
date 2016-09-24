@@ -10,8 +10,8 @@
         <ui:define name="content">
             <h:form>            
                 <h:outputText value="Welcome: "/>
-                <h:inputText id="username" value="#{userController.userName}" required="true"/>
-                <h:commandButton value="test" action="#{userController.register()}"/>
+                <h:inputText id="username" value="#{collectorController.userName}" required="true"/>
+                <h:commandButton value="test" action="#{collectorController.register()}"/>
                 
                 <!-- use this to give the request scopes the user details of the collector-->
                 <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->

@@ -7,7 +7,7 @@ package com.ceaot.controller;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
-import com.ceaot.ejb.UserEJB;
+import com.ceaot.ejb.CollectorEJB;
 import com.ceaot.entity.Collector;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -31,13 +31,13 @@ import javax.faces.bean.ManagedBean;
  *
  * @author stephankranenfeld
  */
-@Named(value = "userController")
+@Named(value = "collectorController")
 @SessionScoped
-public class UserController implements Serializable {
+public class CollectorController implements Serializable {
 
-    // sets up the UserEJB
+    // sets up the CollectorEJB
     @Inject
-    private UserEJB userEJB;
+    private CollectorEJB collectorEJB;
     
     //user entered values
     private String userName;
@@ -49,13 +49,13 @@ public class UserController implements Serializable {
     private byte[] encryptedPass;
     
     //set only when user is logged in
-    private Collector usr;
+    private Collector cltr;
     //used to handle sorting people who ar logged in or out.
     //this allows showing different controls when someone is logged in or out
     private boolean loggedIn = false;
     
 
-    //to test usr creation
+    //to test cltr creation
     public String register() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         try {
@@ -74,7 +74,7 @@ public class UserController implements Serializable {
             c.setPassword(encryptedPass);
 
             try {
-                userEJB.createCollector(c);
+                collectorEJB.createCollector(c);
             } catch (Exception e) {
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to create new collector " + e, ""));
@@ -96,14 +96,14 @@ public class UserController implements Serializable {
     public String login(){
         try{
             FacesContext ctx = FacesContext.getCurrentInstance();
-            usr = userEJB.loggingIn(userName);
-            if(usr == null){//if no usr with username is found return this.
+            cltr = collectorEJB.loggingIn(userName);
+            if(cltr == null){//if no cltr with username is found return this.
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
                 return null;
-            }else if (usr.getPassword() == getEncryptedPassword(password, usr.getSalt())) {// checks the password matches.
+            }else if (cltr.getPassword() == getEncryptedPassword(password, cltr.getSalt())) {// checks the password matches.
                 loggedIn = true;
-                usr.setLoggedIn(loggedIn);
+                cltr.setLoggedIn(loggedIn);
                 return null;
             }else{//if username is found but no password. same error message returned.
                 ctx.addMessage(null,
@@ -119,7 +119,7 @@ public class UserController implements Serializable {
     //@PreDestroy
     public String logout(){
         loggedIn = false;
-        usr = null;
+        cltr = null;
         return null;
     }
     
@@ -164,20 +164,20 @@ public class UserController implements Serializable {
         this.loggedIn = loggedIn;
     }
 
-    public Collector getUsr() {
-        return usr;
+    public Collector getCltr() {
+        return cltr;
     }
 
-    public void setUsr(Collector usr) {
-        this.usr = usr;
+    public void setCltr(Collector cltr) {
+        this.cltr = cltr;
     }
     
-    public UserEJB getUserEJB() {
-        return userEJB;
+    public CollectorEJB getCollectorEJB() {
+        return collectorEJB;
     }
 
-    public void setUserEJB(UserEJB userEJB) {
-        this.userEJB = userEJB;
+    public void setCollectorEJB(CollectorEJB collectorEJB) {
+        this.collectorEJB = collectorEJB;
     }
 
     public String getUserName() {

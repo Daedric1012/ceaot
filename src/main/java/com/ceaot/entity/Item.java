@@ -34,7 +34,7 @@ public class Item implements Serializable{
     @ManyToOne
     private Collector owner;
     
-    private String ownerDes;
+    private String itemDes; //I CHANGED THIS FROM ownerDes ASSUMING IT WAS THE ITEM DESCRIPTION
     
     private String itemName;
     
@@ -83,12 +83,12 @@ public class Item implements Serializable{
         this.owner = owner;
     }
 
-    public String getOwnerDes() {
-        return ownerDes;
+    public String getItemDes() {
+        return itemDes;
     }
 
-    public void setOwnerDes(String ownerDes) {
-        this.ownerDes = ownerDes;
+    public void setItemDes(String itemDes) {
+        this.itemDes = itemDes;
     }
 
     public String getItemName() {

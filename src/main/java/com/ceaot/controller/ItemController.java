@@ -6,6 +6,8 @@
 package com.ceaot.controller;
 
 import com.ceaot.ejb.ItemEJB;
+import com.ceaot.entity.Item;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,6 +28,7 @@ public class ItemController {
     private String category; // Stores item category.
     private Long itemNum; //Stores Item Number
     private String searchString; // Holds the search string from search pages
+    private List<Item> items; // holds results of Item search
     
     
     //TO DO search by Item Number
@@ -92,6 +95,20 @@ public class ItemController {
      */
     public void setSearchString(String searchString) {
         this.searchString = searchString;
+    }
+
+    /**
+     * @return the items
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
     
 }

@@ -10,7 +10,7 @@
         <ui:define name="navigation">&gt;Home Page</ui:define>
         <ui:define name="content">
             
-                 <h:form>            
+            <h:form>            
                     <h:outputText value="Search "/>
                     <h:inputText id="username" value="#{itemController.searchString}" required="true"/>
                     <h:selectOneMenu value="#{itemController.category}">
@@ -29,7 +29,7 @@
                     <!-- use this to give the request scopes the user details of the collector-->
                     <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
                 </h:form> 
-            
+       
         </ui:define>
     </ui:composition>
 </html>

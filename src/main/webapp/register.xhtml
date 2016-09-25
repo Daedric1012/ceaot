@@ -31,7 +31,8 @@
                     <h:inputText value="#{collectorController.password}"  />
                     <f:facet name="footer">
                         <h:panelGroup style="display:block; text-align:center">
-                            <h:commandButton id="submit" value="Submit" />
+                            <h:commandButton id="submit" value="Create Account" action='collectorController.register' />
+                            <h:button value="Back to Home Page" outcome='index'/>
                         </h:panelGroup>
                     </f:facet>
                 </h:panelGrid>
@@ -41,7 +42,7 @@
 
 
 
-                <h:commandButton value="test" action="#{collectorController.register()}"/>
+                
 
                 <!-- use this to give the request scopes the user details of the collector-->
                 <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->

@@ -13,7 +13,7 @@
             <h:form>            
                     <h:outputText value="Search "/>
                     <h:inputText id="username" value="#{itemController.searchString}" required="true"/>
-                    <h:selectOneMenu value="#{itemController.category}">
+                    <h:selectOneMenu value="#{itemController.searchCategory}">
                         <f:selectItem itemValue="All" itemLabel="All Categories" />
                         <f:selectItem itemValue="Auto" itemLabel="Auto" />
                         <f:selectItem itemValue="Antiques" itemLabel="Antiques" />

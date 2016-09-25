@@ -32,23 +32,31 @@ public class ItemEJB {
     SessionContext ctx;
     
     //creates the item
-    public Item createCollector(Item itm){
+    public Item createItem(Item itm){
         em.persist(itm);
         return itm;
     }
     
     //updates the item
-    public void updateCollector(Item itm){
+    public void updateItem(Item itm){
         em.merge(itm);
     }
     
     //returns the list of topic groups
-    public List<Item> getTopics(int groupId){
+    public List<Item> getAllItems(){
         
         //grabs the complete list of topic groups
         Query query = em.createNamedQuery("getAllItems");
         List<Item> itemList = query.getResultList();
         return itemList;
+    }
+    
+    //get item by id
+    public Item getItemById(String id){
+        TypedQuery<Item> query = em.createNamedQuery("getItemById", Item.class);
+        query.setParameter("id", id);
+        Item itm = query.getSingleResult();
+        return itm;
     }
     
 }

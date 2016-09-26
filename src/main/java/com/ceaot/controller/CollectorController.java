@@ -62,26 +62,27 @@ public class CollectorController implements Serializable {
             Collector c = new Collector();
             c.setFirstName(firstName);
             c.setLastName(lastName);
-            c.setEmailAddress(emailAddress);//for testing
+            c.setEmailAddress(emailAddress);
             c.setUsername(userName);
             c.setPhoneNumber(phoneNumber);
 
             byte[] salt = generateSalt();
             //will throw null pointer if password is not set. please remember this!
-            encryptedPass = getEncryptedPassword(userName, salt);
-
+            encryptedPass = getEncryptedPassword(password, salt);
             c.setSalt(salt);
             c.setPassword(encryptedPass);
 
             try {
                 collectorEJB.createCollector(c);
+                //if user 
             } catch (Exception e) {
                 ctx.addMessage(null,
+
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to create new account " + e, ""));
                 return null;
-            }
 
-            FacesMessage msg = new FacesMessage("worked", "worked");
+            }
+            FacesMessage msg = new FacesMessage("Registered!", "Registered!");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             ctx.addMessage("registerForum", msg);
             return "membersHome.xhtml";
@@ -90,7 +91,6 @@ public class CollectorController implements Serializable {
         } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {
             return null;
         }
-
     }
 
     public String login(){
@@ -115,7 +115,7 @@ public class CollectorController implements Serializable {
         return null;
     }
     
-    //clears the session details. before deltion. if set so only 
+    //clears the session details. before deltion or on logout.
     //@PreDestroy
     public String logout(){
         loggedIn = false;

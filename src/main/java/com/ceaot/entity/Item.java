@@ -18,11 +18,13 @@ import java.util.*;
     //find all items by collecter
     @NamedQuery(name = "FindItemsByCollector", query = "SELECT c FROM Item c WHERE c.owner = :uname AND c.removed = false"),
     //find items for sale
-    @NamedQuery(name = "ItemsForSale", query = "SELECT c FROM Item c WHERE c.isForSale = true"),
+    @NamedQuery(name = "ItemsForSale", query = "SELECT c FROM Item c WHERE c.isForSale = true AND c.removed = false"),
     //find items that fit into a catagory
-    @NamedQuery(name = "itemByCatagory", query = "SELECT c FROM Item c WHERE c.catagory = :catagory"),
+    @NamedQuery(name = "itemByCatagory", query = "SELECT c FROM Item c WHERE c.catagory = :catagory AND c.removed = false"),
     //get all items
-    @NamedQuery(name = "getAllItems", query = "SELECT c FROM Item c")
+    @NamedQuery(name = "getAllItems", query = "SELECT c FROM Item c"),
+    //get item by id
+    @NamedQuery(name = "getItemById", query = "SELECT c FROM Item c WHERE c.id = :id AND c.removed = false")
 })
 public class Item implements Serializable{
     
@@ -34,7 +36,7 @@ public class Item implements Serializable{
     @ManyToOne
     private Collector owner;
     
-    private String itemDes; //I CHANGED THIS FROM ownerDes ASSUMING IT WAS THE ITEM DESCRIPTION
+    private String itemDes;
     
     private String itemName;
     

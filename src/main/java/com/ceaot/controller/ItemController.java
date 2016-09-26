@@ -33,12 +33,12 @@ public class ItemController {
     
     //TO DO search by Item Number
     private String searchByNum(){
-        return null;
+        return "searchList.xhtml";
     }
     
     //TO DO Search by description
     private String searchByDes(){
-        return null;
+        return "searchList.xhtml";
     }
 
     /**

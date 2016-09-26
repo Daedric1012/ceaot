@@ -60,11 +60,11 @@ public class CollectorController implements Serializable {
         FacesContext ctx = FacesContext.getCurrentInstance();
         try {
             Collector c = new Collector();
-            c.setFirstName("test");
-            c.setLastName("test");
-            c.setEmailAddress(userName);//for testing
+            c.setFirstName(firstName);
+            c.setLastName(lastName);
+            c.setEmailAddress(emailAddress);//for testing
             c.setUsername(userName);
-            c.setPhoneNumber("test");
+            c.setPhoneNumber(phoneNumber);
 
             byte[] salt = generateSalt();
             //will throw null pointer if password is not set. please remember this!
@@ -77,14 +77,14 @@ public class CollectorController implements Serializable {
                 collectorEJB.createCollector(c);
             } catch (Exception e) {
                 ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to create new collector " + e, ""));
-                return "errorpage.xhtml";
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to create new account " + e, ""));
+                return null;
             }
 
             FacesMessage msg = new FacesMessage("worked", "worked");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             ctx.addMessage("registerForum", msg);
-            return null;
+            return "membersHome.xhtml";
             
             //encryption throws these erros so it contains all this.
         } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {

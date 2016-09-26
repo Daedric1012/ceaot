@@ -10,8 +10,8 @@
                 margin: auto;
                 width: 50%;
                 border: 1px solid gray;
-               
-                
+
+
 
             }
 
@@ -36,12 +36,22 @@
             }
 
             article {
-                width: 50%;
-                margin: auto;
-              
-                
+                width: 70%;
+                margin: auto;                
                 padding: 1em;
                 overflow: hidden;
+              
+            }
+
+            .buttonRed {
+                background-color: #0033cc;
+                color: white;
+                border-radius:12px;
+                padding: 4px 6px;
+                width: 160px;
+                height: 40px;
+                margin: 4px 4px;
+                
             }
         </style>
     </h:head>
@@ -54,11 +64,11 @@
             </header>
             <nav><ui:insert name='navigation'>Default Navigation</ui:insert></nav>
             <h:messages id="errors" infoStyle="color:blue" warnStyle="color:orange" errorStyle="color:red"/>
-           
+
 
             <article>
                 <ui:insert name="content">Default content</ui:insert>
-            
+
             </article>
 
 

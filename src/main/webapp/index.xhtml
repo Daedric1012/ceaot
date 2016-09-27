@@ -21,11 +21,11 @@
                         <f:selectItem itemValue="Dolls" itemLabel="Dolls" />
                         <f:selectItem itemValue="Models" itemLabel="Models" />
                     </h:selectOneMenu>
-                    <h:button class="buttonRed" style=" height: 35px" value="Sign In" outcome='signIn' />
+                    <h:button class="buttonRed" style=" float:right; height: 45px" value="Sign In" outcome='signIn' />
                 </h:panelGroup>
                 <br/>
                 <h:panelGroup style="display:block; text-align:center">
-                    <h:commandButton class="buttonRed" value="Search by Item Number" action="#{itemController.searchByNum()}"/>
+                    <h:commandButton class="buttonRed" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum()}"/>
                     <h:commandButton class="buttonRed" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes()}"/>
                     <h:button class="buttonRed" style="float:right; height: 45px" value='Create Account' outcome='register'/>
                 </h:panelGroup>

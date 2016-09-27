@@ -38,7 +38,7 @@ public class CollectorController implements Serializable {
     // sets up the CollectorEJB
     @Inject
     private CollectorEJB collectorEJB;
-    
+
     //user entered values
     private String userName;
     private String firstName;
@@ -47,13 +47,12 @@ public class CollectorController implements Serializable {
     private String phoneNumber;
     private String password;
     private byte[] encryptedPass;
-    
+
     //set only when user is logged in
     private Collector cltr;
     //used to handle sorting people who ar logged in or out.
     //this allows showing different controls when someone is logged in or out
     private boolean loggedIn = false;
-    
 
     //to test cltr creation
     public String register() {
@@ -77,52 +76,54 @@ public class CollectorController implements Serializable {
                 //if user 
             } catch (Exception e) {
                 ctx.addMessage(null,
-
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Failed to create new account " + e, ""));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account " + e, ""));
                 return null;
 
             }
-            FacesMessage msg = new FacesMessage("Registered!", "Registered!");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            ctx.addMessage("registerForum", msg);
+            ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your account has been created ", ""));
             return "membersHome.xhtml";
-            
+
             //encryption throws these erros so it contains all this.
         } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {
+            ctx.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account " + ex, ""));
             return null;
         }
     }
 
-    public String login(){
-        try{
+    public String login() {
+        try {
             FacesContext ctx = FacesContext.getCurrentInstance();
             cltr = collectorEJB.loggingIn(userName);
-            if(cltr == null){//if no cltr with username is found return this.
+            if (cltr == null) {//if no cltr with username is found return this.
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
                 return null;
-            }else if (cltr.getPassword() == getEncryptedPassword(password, cltr.getSalt())) {// checks the password matches.
+            } else if (cltr.getPassword() == getEncryptedPassword(password, cltr.getSalt())) {// checks the password matches.
                 loggedIn = true;
                 cltr.setLoggedIn(loggedIn);
                 return null;
-            }else{//if username is found but no password. same error message returned.
+            } else {//if username is found but no password. same error message returned.
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
             }
-        }catch (InvalidKeySpecException | NoSuchAlgorithmException e){
-            
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+
         }
         return null;
     }
-    
+
     //clears the session details. before deltion or on logout.
     //@PreDestroy
-    public String logout(){
+    public String logout() {
         loggedIn = false;
         cltr = null;
-        return null;
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ctx.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "You have logged out successfully", ""));
+        return "index.xhtml";
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="used for password encryption">
     public boolean authenticate(String attempt, byte[] encryptedPassword, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
@@ -153,9 +154,8 @@ public class CollectorController implements Serializable {
         return salt;
     }
     //</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="getters and setters for the xhtml code to use.">
 
+    //<editor-fold defaultstate="collapsed" desc="getters and setters for the xhtml code to use.">
     public boolean isLoggedIn() {
         return loggedIn;
     }
@@ -171,7 +171,7 @@ public class CollectorController implements Serializable {
     public void setCltr(Collector cltr) {
         this.cltr = cltr;
     }
-    
+
     public CollectorEJB getCollectorEJB() {
         return collectorEJB;
     }

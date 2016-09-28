@@ -9,44 +9,39 @@
         <ui:define name="title">Create Account</ui:define>
         <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;Create Account</ui:define>
         <ui:define name="content">
-            <h:form>            
+            <div style="text-align: center; display: block; width: 100%">
 
-                <h:panelGrid id="panel" columns="2" border="0" cellpadding="10" cellspacing="1">
-                    <f:facet name="header">
-                        <h:outputText value="Enter your details and create your account"/>
-                    </f:facet>
-                    <h:outputLabel value="First Name" />
-                    <h:inputText value="#{collectorController.firstName}" required="true" />
-                    <h:outputLabel value="Last Name" />
-                    <h:inputText value="#{collectorController.lastName}" required="true" />
-                    <h:outputLabel value="User Name Name" />
-                    <h:inputText value="#{collectorController.userName}" required="true" />
-                    <h:outputLabel value="Email Address" />
-                    <h:inputText value="#{collectorController.emailAddress}" required="true" />
-                    <h:outputLabel value="Phone Number" />
-                    <h:inputText value="#{collectorController.phoneNumber}" required="true" />
-                    <h:outputLabel value="Password" />
-                    <h:inputSecret value="#{collectorController.password}" required="true" />
-                    <h:outputLabel value="Re-enter password" />
-                    <h:inputText value="#{collectorController.password}"  />
-                    <f:facet name="footer">
-                        <h:panelGroup style="display:block; text-align:center">
-                            <h:commandButton id="submit" value="Create Account" action='#{collectorController.register()}' />
-                            <h:button value="Back to Home Page" outcome='index'/>
-                        </h:panelGroup>
-                    </f:facet>
-                </h:panelGrid>
+                <h:form> 
 
-
-
-
-
-
-                
-
-                <!-- use this to give the request scopes the user details of the collector-->
-                <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
-            </h:form> 
+                    <h:panelGrid id="panel" columns="2" border="0" cellpadding="10" cellspacing="1">
+                        <f:facet name="header">
+                            <h:outputText value="Enter your details and create your account"/>
+                        </f:facet>
+                        <h:outputLabel value="First Name" />
+                        <h:inputText value="#{collectorController.firstName}" required="true" />
+                        <h:outputLabel value="Last Name" />
+                        <h:inputText value="#{collectorController.lastName}" required="true" />
+                        <h:outputLabel value="User Name Name" />
+                        <h:inputText value="#{collectorController.userName}" required="true" />
+                        <h:outputLabel value="Email Address" />
+                        <h:inputText value="#{collectorController.emailAddress}" required="true" />
+                        <h:outputLabel value="Phone Number" />
+                        <h:inputText value="#{collectorController.phoneNumber}" required="true" />
+                        <h:outputLabel value="Password" />
+                        <h:inputSecret value="#{collectorController.password}" required="true" />
+                        <h:outputLabel value="Re-enter password" />
+                        <h:inputText value="#{collectorController.password}"  />
+                        <f:facet name="footer">
+                            <h:panelGroup style="display:block; text-align:center">
+                                <h:commandButton id="submit" class="button" value="Create Account" action='#{collectorController.register()}' />
+                                <h:button value="Back to Home Page" class="button" outcome='index'/>
+                            </h:panelGroup>
+                        </f:facet>
+                    </h:panelGrid>
+                    <!-- use this to give the request scopes the user details of the collector-->
+                    <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

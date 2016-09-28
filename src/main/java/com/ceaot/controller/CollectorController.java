@@ -97,15 +97,15 @@ public class CollectorController implements Serializable {
             cltr = collectorEJB.loggingIn(userName);
             if (cltr == null) {//if no cltr with username is found return this.
                 ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or ** incorrect", "")); //CHANGED FOR TESTING
                 return null;
             } else if (cltr.getPassword() == getEncryptedPassword(password, cltr.getSalt())) {// checks the password matches.
                 loggedIn = true;
                 cltr.setLoggedIn(loggedIn);
-                return null;
+                return "membersHome.xhtml";
             } else {//if username is found but no password. same error message returned.
                 ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Username or password incorrect", ""));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "** or password incorrect", "")); //CHANGED FOR TESTING
             }
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
 

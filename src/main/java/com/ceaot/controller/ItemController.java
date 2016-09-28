@@ -87,13 +87,13 @@ public class ItemController {
     }
 
 
-    private String searchByNum() {
+    public String searchByNum() {
         singleItem = itemEJB.getItemById(itemNum.toString());
         return "searchList.xhtml";
     }
 
     //TO DO Search by description
-    private String searchByDes(){
+    public String searchByDes(){
         return "searchList.xhtml";
    }
 

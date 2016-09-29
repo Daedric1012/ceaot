@@ -97,15 +97,16 @@ public class CollectorController implements Serializable {
             cltr = collectorEJB.loggingIn(userName);
             if (cltr == null) {//if no cltr with username is found return this.
                 ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or ** incorrect", "")); //CHANGED FOR TESTING
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or Password incorrect", "")); 
                 return null;
-            } else if (cltr.getPassword() == getEncryptedPassword(password, cltr.getSalt())) {// checks the password matches.
+            } else if (authenticate(password, cltr.getPassword(), cltr.getSalt())) {// checks the password matches.
                 loggedIn = true;
                 cltr.setLoggedIn(loggedIn);
                 return "membersHome.xhtml";
             } else {//if username is found but no password. same error message returned.
+                cltr = null;//sets back to null on failed to avoid any possible abuse of trying to log into another account.
                 ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "** or password incorrect", "")); //CHANGED FOR TESTING
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or password incorrect", ""));
             }
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
 
@@ -125,6 +126,7 @@ public class CollectorController implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="used for password encryption">
+    //compares the arrays created after the password is hashed.
     public boolean authenticate(String attempt, byte[] encryptedPassword, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
         byte[] encryptedAttemptedPassword = getEncryptedPassword(attempt, salt);

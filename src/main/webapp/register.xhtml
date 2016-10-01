@@ -11,26 +11,26 @@
         <ui:define name="content">
             <div style="text-align: center; display: block; width: 100%">
 
-                <h:form> 
+                <h:form style="border: solid chocolate"> 
 
-                    <h:panelGrid id="panel" columns="2" border="0" cellpadding="10" cellspacing="1">
+                    <h:panelGrid style="margin: auto" id="panel" columns="2" border="0" cellpadding="10" cellspacing="1"  >
                         <f:facet name="header">
                             <h:outputText value="Enter your details and create your account"/>
                         </f:facet>
                         <h:outputLabel value="First Name" />
-                        <h:inputText value="#{collectorController.firstName}" required="true" />
+                        <h:inputText value="#{collectorController.firstName}" required="true" style="width: 250px" />
                         <h:outputLabel value="Last Name" />
-                        <h:inputText value="#{collectorController.lastName}" required="true" />
+                        <h:inputText value="#{collectorController.lastName}" required="true" style="width: 250px"/>
                         <h:outputLabel value="User Name Name" />
-                        <h:inputText value="#{collectorController.userName}" required="true" />
+                        <h:inputText value="#{collectorController.userName}" required="true" style="width: 250px" />
                         <h:outputLabel value="Email Address" />
-                        <h:inputText value="#{collectorController.emailAddress}" required="true" />
+                        <h:inputText value="#{collectorController.emailAddress}" required="true" style="width: 250px" />
                         <h:outputLabel value="Phone Number" />
-                        <h:inputText value="#{collectorController.phoneNumber}" required="true" />
+                        <h:inputText value="#{collectorController.phoneNumber}" required="true" style="width: 250px" />
                         <h:outputLabel value="Password" />
-                        <h:inputSecret value="#{collectorController.password}" required="true" />
+                        <h:inputSecret value="#{collectorController.password}" required="true" style="width: 250px" />
                         <h:outputLabel value="Re-enter password" />
-                        <h:inputText value="#{collectorController.password}"  />
+                        <h:inputText value="#{collectorController.password}"  style="width: 250px" />
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
                                 <h:commandButton id="submit" class="button" value="Create Account" action='#{collectorController.register()}' />

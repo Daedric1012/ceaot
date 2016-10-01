@@ -9,18 +9,21 @@
             div.container {
                 margin: auto;
                 width: 50%;
-                border: 1px solid gray;
+                min-height: 600px;
+                background: #efefef;
+                position: relative;
 
 
 
             }
 
-            header {
+            header, footer {
                 padding: 1em;
                 color: black;
                 background-color: lightcyan;
                 clear: left;
                 text-align: center;
+                
             }
 
             nav {
@@ -40,8 +43,8 @@
                 margin: auto;                
                 padding: 1em;
                 overflow: hidden;
-                
-              
+
+
             }
 
             .button {
@@ -52,14 +55,13 @@
                 width: 160px;
                 height: 40px;
                 margin: 4px 4px;
-                
+
             }
         </style>
     </h:head>
     <h:body>
 
         <div class="container">
-
             <header>
                 <h1>Collection Community's Display and Sales System</h1>
             </header>
@@ -71,9 +73,9 @@
                 <ui:insert name="content">Default content</ui:insert>
 
             </article>
-
-
+           
         </div>
+
     </h:body>
 </html>
 

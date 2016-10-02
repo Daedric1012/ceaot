@@ -28,12 +28,11 @@
                         <h:outputLabel value="Phone Number" />
                         <h:inputText value="#{collectorController.phoneNumber}" required="true" style="width: 250px" />
                         <h:outputLabel value="Password" />
-                        <h:inputSecret value="#{collectorController.password}" required="true" style="width: 250px" />
-                        <ui:remove>
-                            <!--TO DO investigate how to do validation of password-->
-                        </ui:remove>
+                        <h:inputSecret value="#{collectorController.password}" required="true" style="width: 250px">
+                        <f:validateRegex pattern="[a-zA-Z0-9\p{Punct}\s]+" /><f:validateLength maximum="10"/>
+                        </h:inputSecret>
                         <h:outputLabel value="Re-enter password" />
-                        <h:inputText value="#{collectorController.password}"  style="width: 250px" />
+                        <h:inputSecret value="#{collectorController.password2}"  style="width: 250px" />
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
                                 <h:commandButton id="submit" class="button" value="Create Account" action='#{collectorController.register()}' />

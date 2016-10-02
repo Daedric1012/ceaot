@@ -47,6 +47,7 @@ public class CollectorController implements Serializable {
     private String emailAddress;
     private String phoneNumber;
     private String password;
+    private String password2;
     private byte[] encryptedPass;
     private Item item = new Item();
 
@@ -60,21 +61,25 @@ public class CollectorController implements Serializable {
     public String register() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         try {
-            //Collector c = new Collector(); Changed this to use the same instance of Collector that signIn() uses.
-            getCltr().setFirstName(firstName);
-            getCltr().setLastName(lastName);
-            getCltr().setEmailAddress(emailAddress);
-            getCltr().setUsername(userName);
-            getCltr().setPhoneNumber(phoneNumber);
+            Collector c = new Collector();
+            c.setFirstName(firstName);
+            c.setLastName(lastName);
+            c.setEmailAddress(emailAddress);
+            c.setUsername(userName);
+            c.setPhoneNumber(phoneNumber);
+            if(password != password2){//if passwords don't match
+                ctx.addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account Passwords don't match", ""));
+                return null;
+            }
 
             byte[] salt = generateSalt();
             //will throw null pointer if password is not set. please remember this!
             encryptedPass = getEncryptedPassword(password, salt);
-            getCltr().setSalt(salt);
-            getCltr().setPassword(encryptedPass);
-
+            c.setSalt(salt);
+            c.setPassword(encryptedPass);
             try {
-                collectorEJB.createCollector(getCltr());
+                collectorEJB.createCollector(c);
                 //if user 
             } catch (Exception e) {
                 ctx.addMessage(null,
@@ -84,7 +89,8 @@ public class CollectorController implements Serializable {
             }
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your account has been created ", ""));
             loggedIn = true;
-            getCltr().setLoggedIn(loggedIn);
+            cltr = c;
+            cltr.setLoggedIn(loggedIn);
             return "membersHome.xhtml";
 
             //encryption throws these erros so it contains all this.

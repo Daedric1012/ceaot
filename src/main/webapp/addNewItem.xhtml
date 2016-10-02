@@ -11,18 +11,18 @@
         <ui:define name="content">
             <div style="text-align: center; display: block; width: 100%">
 
-                <h:form style="border: solid chocolate"> 
+                <h:form> 
 
                     <h:panelGrid style="margin: auto; text-align: left" id="panel" columns="2" border="0" cellpadding="10" cellspacing="1"  >
                         <f:facet name="header">
                             <h:outputText value="Enter details of new item"/>
                         </f:facet>
                         <h:outputLabel value="Item Name" />
-                        <h:inputText value="#{itemController.itemName}" required="true" style="width: 250px" />
+                        <h:inputText value="#{collectorController.item.itemName}" required="true" style="width: 250px" />
                         <h:outputLabel value="Item Description" />
-                        <h:inputText value="#{itemController.itemDes}" required="true" style="width: 250px"/>
+                        <h:inputText value="#{collectorController.item.itemDes}" required="true" style="width: 250px"/>
                         <h:outputLabel value="Catergory" />
-                        <h:selectOneMenu value="#{itemController.category}" >
+                        <h:selectOneMenu value="#{collectorController.item.category}" >
                             <f:selectItem itemValue="All" itemLabel="Select One" />
                             <f:selectItem itemValue="Auto" itemLabel="Auto" />
                             <f:selectItem itemValue="Antiques" itemLabel="Antiques" />
@@ -30,17 +30,18 @@
                             <f:selectItem itemValue="Models" itemLabel="Models" />
                         </h:selectOneMenu>
                         <h:outputLabel value="Photo " />
-                        <h:inputText value="#{itemController.photoLinks}" required="true" style="width: 250px" />
+                        <h:inputText value="#{collectorController.item.photoLinks}" required="true" style="width: 250px" />
                         <h:outputLabel value="Item is for sale" />
-                        <h:selectBooleanCheckbox onclick="renderFields" id="forSale" style="width:20px; height: 20px" value="#{itemController.isForSale}"/>
+                        <h:selectBooleanCheckbox onclick="renderFields" id="forSale" style="width:20px; height: 20px" value="#{collectorController.item.isForSale}"/>
+                        <ui:remove><!-- TO DO investigate how to hide below items when not required--></ui:remove>
                         <h:outputLabel value="Price" />
-                        <h:inputSecret value="#{itemController.price}" required="true"  />
+                        <h:inputText value="#{collectorController.item.price}"  />
                         <h:outputLabel value="Payment Method" />
-                        <h:inputText value="#{itemController.paymentMethod}"  style="width: 250px" />
+                        <h:inputText value="#{collectorController.item.paymentMethod}"  style="width: 250px" />
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
-                                <h:commandButton id="submit" class="button" value="Save New Item" action='#{itemController.addItem()}' />
-                                <h:button value="Back to Home Page" class="button" outcome='index'/>
+                                <h:commandButton id="submit" class="button" value="Save New Item" action='#{collectorController.addItem()}' />
+                                <h:button value="Back to Home Page" class="button" outcome='membersHome'/>
                             </h:panelGroup>
                         </f:facet>
                     </h:panelGrid>

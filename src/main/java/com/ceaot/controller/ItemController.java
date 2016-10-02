@@ -51,17 +51,19 @@ public class ItemController {
         tempItem.setOwner(owner);
         tempItem.setItemName(itemName);
         tempItem.setItemDes(itemDes);
-        tempItem.setCatagory(category);
+        tempItem.setCategory(category);
         tempItem.setIsForSale(isForSale);
         tempItem.setPhotoLinks(photoLinks);
         tempItem.setPrice(price);
         tempItem.setPaymentMethod(paymentMethod);
         try {
             itemEJB.createItem(tempItem);
-            return null;
+            ctx.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "New Item Added", ""));
+            return "membersHome.xhtml";
         } catch (Exception e) {
             ctx.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration failed", ""));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed", ""));
             return null;//change to refresh the page.
         }
     }
@@ -71,7 +73,7 @@ public class ItemController {
         //owner or ID can't/shouldn't be changed so not here.
         singleItem.setItemName(itemName);
         singleItem.setItemDes(itemDes);
-        singleItem.setCatagory(category);
+        singleItem.setCategory(category);
         singleItem.setIsForSale(isForSale);
         singleItem.setPhotoLinks(photoLinks);
         singleItem.setPrice(price);

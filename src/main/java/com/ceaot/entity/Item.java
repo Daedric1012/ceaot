@@ -19,8 +19,8 @@ import java.util.*;
     @NamedQuery(name = "FindItemsByCollector", query = "SELECT c FROM Item c WHERE c.owner = :uname AND c.removed = false"),
     //find items for sale
     @NamedQuery(name = "ItemsForSale", query = "SELECT c FROM Item c WHERE c.isForSale = true AND c.removed = false"),
-    //find items that fit into a catagory
-    @NamedQuery(name = "itemByCatagory", query = "SELECT c FROM Item c WHERE c.catagory = :catagory AND c.removed = false"),
+    //find items that fit into a category
+    @NamedQuery(name = "itemByCatagory", query = "SELECT c FROM Item c WHERE c.category = :category AND c.removed = false"),
     //get all items
     @NamedQuery(name = "getAllItems", query = "SELECT c FROM Item c"),
     //get item by id
@@ -40,7 +40,7 @@ public class Item implements Serializable{
     
     private String itemName;
     
-    private String catagory;
+    private String category;
     
     private boolean isForSale;
     
@@ -56,7 +56,7 @@ public class Item implements Serializable{
     @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Collector> interestedIn;
     
-    //comments will be retrived through the ItemEJB or the UserEJB as they don't need their own controller.
+    //comments will be retrived through the ItemEJB or the CollectorEJB as they don't need their own controller.
     @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Comment> comments;
 
@@ -69,12 +69,12 @@ public class Item implements Serializable{
         this.id = id;
     }
 
-    public String getCatagory() {
-        return catagory;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCatagory(String catagory) {
-        this.catagory = catagory;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Collector getOwner() {

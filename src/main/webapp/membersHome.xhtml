@@ -11,7 +11,7 @@
         <ui:define name="navigation">&gt;Members Home</ui:define>
         <ui:define name="content">
             <h:panelGroup style="display: block; text-align:center">
-                <h:button class="button" value="Edit My Details" outcome="null"/> <!-- TO DO change this outcome-->
+                <h:button class="button" value="Edit My Details" outcome="editMyDetails"/> <!-- TO DO change this outcome-->
                 <h:button class="button" value="List My Items" outcome="null"/> <!--TO DO change this outcome-->
                 <h:button class="button" value="Add New Items" outcome="addNewItem"/>
                 <h:button class="button" value="Sign Out" outcome="#{collectorController.logout()}"/>

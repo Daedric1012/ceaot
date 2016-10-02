@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import com.ceaot.ejb.CollectorEJB;
 import com.ceaot.entity.Collector;
+import com.ceaot.entity.Item;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -47,9 +48,10 @@ public class CollectorController implements Serializable {
     private String phoneNumber;
     private String password;
     private byte[] encryptedPass;
+    private Item item = new Item();
 
     //set only when user is logged in
-    private Collector cltr;
+    private Collector cltr = new Collector();
     //used to handle sorting people who ar logged in or out.
     //this allows showing different controls when someone is logged in or out
     private boolean loggedIn = false;
@@ -58,21 +60,21 @@ public class CollectorController implements Serializable {
     public String register() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         try {
-            Collector c = new Collector();
-            c.setFirstName(firstName);
-            c.setLastName(lastName);
-            c.setEmailAddress(emailAddress);
-            c.setUsername(userName);
-            c.setPhoneNumber(phoneNumber);
+            //Collector c = new Collector(); Changed this to use the same instance of Collector that signIn() uses.
+            getCltr().setFirstName(firstName);
+            getCltr().setLastName(lastName);
+            getCltr().setEmailAddress(emailAddress);
+            getCltr().setUsername(userName);
+            getCltr().setPhoneNumber(phoneNumber);
 
             byte[] salt = generateSalt();
             //will throw null pointer if password is not set. please remember this!
             encryptedPass = getEncryptedPassword(password, salt);
-            c.setSalt(salt);
-            c.setPassword(encryptedPass);
+            getCltr().setSalt(salt);
+            getCltr().setPassword(encryptedPass);
 
             try {
-                collectorEJB.createCollector(c);
+                collectorEJB.createCollector(getCltr());
                 //if user 
             } catch (Exception e) {
                 ctx.addMessage(null,
@@ -81,12 +83,14 @@ public class CollectorController implements Serializable {
 
             }
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your account has been created ", ""));
+            loggedIn = true;
+            getCltr().setLoggedIn(loggedIn);
             return "membersHome.xhtml";
 
             //encryption throws these erros so it contains all this.
         } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {
             ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account " + ex, ""));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account " + ex, ""));
             return null;
         }
     }
@@ -94,17 +98,17 @@ public class CollectorController implements Serializable {
     public String login() {
         try {
             FacesContext ctx = FacesContext.getCurrentInstance();
-            cltr = collectorEJB.loggingIn(userName);
-            if (cltr == null) {//if no cltr with username is found return this.
+            setCltr(collectorEJB.loggingIn(userName));
+            if (getCltr() == null) {//if no cltr with username is found return this.
                 ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or Password incorrect", "")); 
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or Password incorrect", ""));
                 return null;
-            } else if (authenticate(password, cltr.getPassword(), cltr.getSalt())) {// checks the password matches.
+            } else if (authenticate(password, getCltr().getPassword(), getCltr().getSalt())) {// checks the password matches.
                 loggedIn = true;
-                cltr.setLoggedIn(loggedIn);
+                getCltr().setLoggedIn(loggedIn);
                 return "membersHome.xhtml";
             } else {//if username is found but no password. same error message returned.
-                cltr = null;//sets back to null on failed to avoid any possible abuse of trying to log into another account.
+                setCltr(null);//sets back to null on failed to avoid any possible abuse of trying to log into another account.
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or password incorrect", ""));
             }
@@ -118,11 +122,25 @@ public class CollectorController implements Serializable {
     //@PreDestroy
     public String logout() {
         loggedIn = false;
-        cltr = null;
+        setCltr(null);
         FacesContext ctx = FacesContext.getCurrentInstance();
         ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "You have logged out successfully", ""));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "You have logged out successfully", ""));
         return "index.xhtml";
+    }
+
+    //TO DO 
+    public String updateCollector() {
+        return null;
+    }
+
+    public String addItem() {
+        cltr.setItem(item);
+        collectorEJB.updateCollector(getCltr());
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully added new item", ""));
+
+        return "membersHome.xhtml";
     }
 
     //<editor-fold defaultstate="collapsed" desc="used for password encryption">
@@ -230,4 +248,18 @@ public class CollectorController implements Serializable {
         this.password = password;
     }
     //</editor-fold>
+
+    /**
+     * @return the item
+     */
+    public Item getItem() {
+        return item;
+    }
+
+    /**
+     * @param item the item to set
+     */
+    public void setItem(Item item) {
+        this.item = item;
+    }
 }

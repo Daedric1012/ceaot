@@ -11,23 +11,23 @@
         <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;Search List</ui:define>
         <ui:define name="content">
             <h:panelGroup style="width: 75%; float: right;">
-                <h:button value="New Search" outcome="index.xhtml"/>
-                <h:button value="Sign In" outcome="signIn.xhtml.xhtml"/>
-                <h:button value="Create an Account" outcome="register.xhtml"/>
+                <h:button value="New Search" outcome="index"/>
+                <h:button value="Sign In" outcome="signIn"/>
+                <h:button value="Create an Account" outcome="register"/>
             </h:panelGroup>
             <h:panelGroup style="width: 50%; float: left;">
-                <h:button value="" outcome="index.xhtml"/>
-                <h:button value="Sign In" outcome="signIn.xhtml.xhtml"/>
-                <h:button value="Create an Account" outcome="register.xhtml"/>
+                <h:button value="All Items" outcome="index"/>
+                <h:button value="For Sale" outcome="signIn"/>
+                <h:button value="Not For Sale" outcome="register"/>
             </h:panelGroup>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2"  border="2">
                 <c:forEach items="#{itemController.items}" var="item">
                     <h:graphicImage value="${item.photoLinks}" height="50"/>
                     <h:panelGroup style="text-align: left">
                         <h:outputText value="#{item.itemName}"/>
                         <h:outputText value="#{item.itemDes}"/>
                         <h:outputText value="#{item.price}"/>
-                        <h:outputText value="Item &#35 + #{item.id}"/>
+                        <h:outputText value="Item &#35; #{item.id}"/>
                     </h:panelGroup>
                 </c:forEach>
             </h:panelGrid>

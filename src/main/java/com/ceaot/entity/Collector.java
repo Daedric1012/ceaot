@@ -67,8 +67,12 @@ public class Collector implements Serializable {
         return items;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setItem(Item item) {
+        items.add(item);
+    }
+    
+    public void removeItem(Item item) {
+        items.remove(item);
     }
 
     public List<Comment> getcommentsAboutMe() {

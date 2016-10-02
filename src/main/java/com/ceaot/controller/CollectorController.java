@@ -105,6 +105,7 @@ public class CollectorController implements Serializable {
                 return "membersHome.xhtml";
             } else {//if username is found but no password. same error message returned.
                 cltr = null;//sets back to null on failed to avoid any possible abuse of trying to log into another account.
+                loggedIn = false;
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or password incorrect", ""));
             }

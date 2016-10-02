@@ -57,7 +57,8 @@ public class ItemController {
         tempItem.setPrice(price);
         tempItem.setPaymentMethod(paymentMethod);
         try {
-            itemEJB.createItem(tempItem);
+            //itemEJB.createItem(tempItem);
+            owner.setItem(tempItem);
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "New Item Added", ""));
             return "membersHome.xhtml";

@@ -59,4 +59,8 @@ public class ItemEJB {
         return itm;
     }
     
+    //updates the user, used when creating a new item.
+    public void updateCollector(Collector cltr){
+        em.merge(cltr);
+    }
 }

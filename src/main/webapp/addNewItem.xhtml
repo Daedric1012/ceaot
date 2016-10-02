@@ -12,7 +12,7 @@
             <div style="text-align: center; display: block; width: 100%">
 
                 <h:form> 
-
+                    <f:setPropertyActionListener target="#{itemController.owner}" value="#{collectorController.cltr}" />
                     <h:panelGrid style="margin: auto; text-align: left" id="panel" columns="2" border="0" cellpadding="10" cellspacing="1"  >
                         <f:facet name="header">
                             <h:outputText value="Enter details of new item"/>

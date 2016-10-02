@@ -11,9 +11,12 @@
         <ui:define name="navigation">&gt;Members Home</ui:define>
         <ui:define name="content">
             <h:panelGroup style="display: block; text-align:center">
-                <h:button class="buttonRed" value="Edit My Details" outcome="null"/> <!-- TO DO change this outcome-->
-                <h:button class="buttonRed" value="List My Items" outcome="null"/> <!--TO DO change this outcome-->
-                <h:button class="buttonRed" value="Sign Out" outcome="#{collectorController.logout()}"/>
+                <h:button class="button" value="Edit My Details" outcome="editMyDetails"/> <!-- TO DO change this outcome-->
+                <h:button class="button" value="List My Items" outcome="null"/> <!--TO DO change this outcome-->
+                <h:button class="button" value="Add New Items" outcome="addNewItem"/>
+                <h:button class="button" value="Sign Out" outcome="#{collectorController.logout()}"/>
+                
+                <br/><br/>
             </h:panelGroup>
             <h:form>            
                 <h:panelGroup style="display:block; text-align:center;">
@@ -26,10 +29,9 @@
                         <f:selectItem itemValue="Models" itemLabel="Models" />
                     </h:selectOneMenu>
                 </h:panelGroup>
-                <br/>
                 <h:panelGroup style="display:block; text-align:center">
-                    <h:commandButton class="buttonRed" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum()}"/>
-                    <h:commandButton class="buttonRed" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes()}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum()}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes()}"/>
 
                 </h:panelGroup>
                 <!-- use this to give the request scopes the user details of the collector-->

@@ -6,7 +6,6 @@
 package com.ceaot.controller;
 
 import java.io.Serializable;
-import javax.ejb.EJB;
 import com.ceaot.ejb.CollectorEJB;
 import com.ceaot.entity.Collector;
 import com.ceaot.entity.Item;
@@ -15,18 +14,14 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
-import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import javax.faces.bean.ManagedBean;
 
 /**
  *
@@ -52,26 +47,22 @@ public class CollectorController implements Serializable {
     private Item item = new Item();
 
     //set only when user is logged in
-    private Collector cltr = new Collector();
+    private Collector cltr;
     //used to handle sorting people who ar logged in or out.
     //this allows showing different controls when someone is logged in or out
-    private boolean loggedIn = false;
+    private boolean loggedIn;
 
     //to test cltr creation
     public String register() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         try {
+            //add in check passwords match
             Collector c = new Collector();
             c.setFirstName(firstName);
             c.setLastName(lastName);
             c.setEmailAddress(emailAddress);
             c.setUsername(userName);
             c.setPhoneNumber(phoneNumber);
-            if(password != password2){//if passwords don't match
-                ctx.addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account Passwords don't match", ""));
-                return null;
-            }
 
             byte[] salt = generateSalt();
             //will throw null pointer if password is not set. please remember this!
@@ -104,20 +95,17 @@ public class CollectorController implements Serializable {
     public String login() {
         try {
             FacesContext ctx = FacesContext.getCurrentInstance();
-            setCltr(collectorEJB.loggingIn(userName));
-            if (getCltr() == null) {//if no cltr with username is found return this.
+            cltr = collectorEJB.loggingIn(userName);
+            if (cltr == null) {//if no cltr with username is found return this.
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or Password incorrect", ""));
                 return null;
-            } else if (authenticate(password, getCltr().getPassword(), getCltr().getSalt())) {// checks the password matches.
+            } else if (authenticate(password, cltr.getPassword(), cltr.getSalt())) {// checks the password matches.
                 loggedIn = true;
-                getCltr().setLoggedIn(loggedIn);
+                cltr.setLoggedIn(loggedIn);
                 return "membersHome.xhtml";
             } else {//if username is found but no password. same error message returned.
-
-                cltr = null;//sets back to null on failed to avoid any possible abuse of trying to log into another account.
                 loggedIn = false;
-                setCltr(null);//sets back to null on failed to avoid any possible abuse of trying to log into another account.
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username or password incorrect", ""));
             }
@@ -131,7 +119,7 @@ public class CollectorController implements Serializable {
     //@PreDestroy
     public String logout() {
         loggedIn = false;
-        setCltr(null);
+        cltr = null;
         FacesContext ctx = FacesContext.getCurrentInstance();
         ctx.addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "You have logged out successfully", ""));
@@ -254,6 +242,14 @@ public class CollectorController implements Serializable {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getPassword2() {
+        return password;
+    }
+
+    public void setPassword2(String password) {
         this.password = password;
     }
     //</editor-fold>

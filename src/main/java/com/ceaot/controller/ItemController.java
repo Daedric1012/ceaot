@@ -46,8 +46,14 @@ public class ItemController {
     FacesContext ctx = FacesContext.getCurrentInstance();
 
     //regester an item
-    public String addItem() {
+    public String addItem(Collector usr) {
+        owner = usr;
         Item tempItem = new Item();
+        if(owner == null){
+            
+            ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "owner = null", ""));
+            return null;
+        }
         tempItem.setOwner(owner);
         tempItem.setItemName(itemName);
         tempItem.setItemDes(itemDes);
@@ -57,8 +63,11 @@ public class ItemController {
         tempItem.setPrice(price);
         tempItem.setPaymentMethod(paymentMethod);
         try {
+            
+            ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your account has been created ", ""));
             //itemEJB.createItem(tempItem);
             owner.setItem(tempItem);
+            itemEJB.updateCollector(owner);
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "New Item Added", ""));
             return "membersHome.xhtml";

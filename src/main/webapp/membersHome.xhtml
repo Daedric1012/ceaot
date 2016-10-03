@@ -5,7 +5,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="layout.xhtml">
         <ui:define name="title">Members Home</ui:define>
         <ui:define name="navigation">&gt;Members Home</ui:define>
@@ -20,6 +21,14 @@
             </h:panelGroup>
             <h:form>            
                 <h:panelGroup style="display:block; text-align:center;">
+                    
+                            <h:outputText value='stuff:'/>
+                            <c:if test="#{collectorController.loggedIn}">
+                                <h:outputText value="logged in"/>
+                                
+                                <h:outputText value="#{collectorController.cltr.firstName}"/>
+                            </c:if>
+                            <h:outputText value='#{collectorController.cltr.firstName}'/>
                     <h:inputText id="username" value="#{itemController.searchString}" style="width:300px; height:30px; margin: 6px 6px" p:placeholder="Search...." required="true"/>
                     <h:selectOneMenu value="#{itemController.category}" style="height:35px">
                         <f:selectItem itemValue="All" itemLabel="All Categories" />
@@ -34,8 +43,6 @@
                     <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes()}"/>
 
                 </h:panelGroup>
-                <!-- use this to give the request scopes the user details of the collector-->
-                <!-- <f:setPropertyActionListener target="#{commentController.usr}" value="#{userController.usr}" /> -->
             </h:form>  
 
         </ui:define>

@@ -21,6 +21,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+
+import javax.ejb.EJB;
 import javax.inject.Named;
 
 /**

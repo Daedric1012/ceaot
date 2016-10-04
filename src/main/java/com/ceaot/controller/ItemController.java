@@ -19,8 +19,8 @@ import javax.inject.Named;
  *
  * @author stephankranenfeld
  */
-@Named(value = "itemController")
 @RequestScoped
+@Named(value = "itemController")
 public class ItemController {
 
     // sets up the UserEJB

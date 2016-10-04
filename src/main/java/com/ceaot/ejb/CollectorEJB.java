@@ -9,12 +9,7 @@ import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.List;
-import javax.ejb.EJBException;
-import java.sql.SQLException;
-import javax.faces.application.FacesMessage;
 import javax.persistence.NoResultException;
 
 import com.ceaot.entity.Collector;

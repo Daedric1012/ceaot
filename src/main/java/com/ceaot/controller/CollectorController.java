@@ -29,8 +29,8 @@ import javax.inject.Named;
  *
  * @author stephankranenfeld
  */
-@Named(value = "collectorController")
 @SessionScoped
+@Named(value = "collectorController")
 public class CollectorController implements Serializable {
 
     // sets up the CollectorEJB
@@ -118,8 +118,7 @@ public class CollectorController implements Serializable {
     }
 
     //clears the session details. before deltion or on logout.
-    //@PreDestroy
-    public String logout() {
+    public String logMeOut() {
         loggedIn = false;
         cltr = null;
         FacesContext ctx = FacesContext.getCurrentInstance();
@@ -131,15 +130,6 @@ public class CollectorController implements Serializable {
     //TO DO 
     public String updateCollector() {
         return null;
-    }
-
-    public String addItem() {
-        cltr.setItem(item);
-        collectorEJB.updateCollector(getCltr());
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully added new item", ""));
-
-        return "membersHome.xhtml";
     }
 
     //<editor-fold defaultstate="collapsed" desc="used for password encryption">
@@ -255,18 +245,4 @@ public class CollectorController implements Serializable {
         this.password = password;
     }
     //</editor-fold>
-
-    /**
-     * @return the item
-     */
-    public Item getItem() {
-        return item;
-    }
-
-    /**
-     * @param item the item to set
-     */
-    public void setItem(Item item) {
-        this.item = item;
-    }
 }

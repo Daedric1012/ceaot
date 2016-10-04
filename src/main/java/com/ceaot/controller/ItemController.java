@@ -26,6 +26,10 @@ public class ItemController {
     // sets up the UserEJB
     @Inject
     private ItemEJB itemEJB;
+    
+    //gives the item access to the user information
+    @Inject
+    private CollectorController usr;
 
     private String searchCategory; // Stores item category for search.
     private Long itemNum; //Stores Item Number for search.
@@ -46,8 +50,8 @@ public class ItemController {
     FacesContext ctx = FacesContext.getCurrentInstance();
 
     //regester an item
-    public String addItem(Collector usr) {
-        owner = usr;
+    public String addItem() {
+        owner = usr.getCltr();
         Item tempItem = new Item();
         if(owner == null){
             
@@ -70,6 +74,7 @@ public class ItemController {
             itemEJB.updateCollector(owner);
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "New Item Added", ""));
+            usr.updateCltr();
             return "membersHome.xhtml";
         } catch (Exception e) {
             ctx.addMessage(null,

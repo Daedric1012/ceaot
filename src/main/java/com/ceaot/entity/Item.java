@@ -61,6 +61,17 @@ public class Item implements Serializable{
     private List<Comment> comments;
 
     //getters and setters
+    
+    //used to provide string version of id
+    
+    public String getStringID(){
+        if(id == null){
+            return null;
+        }
+        String temp = Long.toString(id);
+        return temp;
+    }
+    
     public Long getId() {
         return id;
     }

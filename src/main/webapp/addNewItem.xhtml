@@ -39,7 +39,8 @@
                         <h:inputText value="#{itemController.paymentMethod}"  style="width: 250px" />
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
-                                <h:commandButton id="submit" class="button" value="Save New Item" action='#{itemController.addItem(collectorController.cltr)}' >
+                                <h:commandButton id="submit" class="button" value="Save New Item" action='#{itemController.addItem()}' >
+                                    <f:actionListener binding="#{collectorController.updateCltr()}" />
                                 </h:commandButton>
                                 <h:button value="Back to Home Page" class="button" outcome='membersHome'/>
                             </h:panelGroup>

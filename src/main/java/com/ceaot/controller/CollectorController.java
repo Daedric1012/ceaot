@@ -8,7 +8,6 @@ package com.ceaot.controller;
 import java.io.Serializable;
 import com.ceaot.ejb.CollectorEJB;
 import com.ceaot.entity.Collector;
-import com.ceaot.entity.Item;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -16,13 +15,10 @@ import java.security.spec.KeySpec;
 import java.util.Arrays;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-
-import javax.ejb.EJB;
 import javax.inject.Named;
 
 /**
@@ -46,7 +42,6 @@ public class CollectorController implements Serializable {
     private String password;
     private String password2;
     private byte[] encryptedPass;
-    private Item item = new Item();
 
     //set only when user is logged in
     private Collector cltr;
@@ -114,6 +109,12 @@ public class CollectorController implements Serializable {
         } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
 
         }
+        return null;
+    }
+    
+    //when a collecter adds an item it's not updating this clt updates the user
+    public String updateCltr(){
+        cltr = collectorEJB.loggingIn(userName);
         return null;
     }
 

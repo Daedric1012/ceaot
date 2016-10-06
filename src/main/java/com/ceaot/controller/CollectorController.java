@@ -132,11 +132,6 @@ public class CollectorController implements Serializable {
     public String updateCollector() {
         collectorEJB.updateCollector(cltr);
         FacesContext ctx = FacesContext.getCurrentInstance();
-        // Clear out previous messages to avoid build up of messages on web pages
-        if (ctx.getMessages() != null) {
-            ctx.getMessages().remove();
-        }
-        // Add the new message
         ctx.addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Your details have been updated","")); 
         return null;

@@ -25,8 +25,8 @@
                 </h:panelGroup>
                 <br/>
                 <h:panelGroup style="display:block; text-align:center">
-                    <h:commandButton class="button" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum()}"/>
-                    <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes()}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum('viewItem.xhtml')}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes('searchList.xhtml')}"/>
                     <h:button class="button" style="float:right; height: 45px" value='Create Account' outcome='register'/>
                 </h:panelGroup>
             </h:form> 

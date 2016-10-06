@@ -103,9 +103,9 @@ public class ItemController {
     }
 
 
-    public String searchByNum() {
+    public String searchByNum(String nextPage) {
         singleItem = itemEJB.getItemById(itemNum);
-        return "searchList.xhtml";
+        return nextPage;
     }
     
     public String getItem(){
@@ -114,18 +114,18 @@ public class ItemController {
     }
 
     //TO DO Search by description into a List<Items> items
-    public String searchByDes(){
-        return "searchList.xhtml";
+    public String searchByDes(String nextPage){
+        return nextPage;
     }
     
     //TO DO Search by description into a List<Items> items, where items are For Sale
-    public String searchByDesForSale(){
-        return "searchList.xhtml";
+    public String searchByDesForSale(String nextPage){
+        return nextPage;
     }
 
     //TO DO Search by description into a List<Items> items, where items are not for sale
-    public String searchByDesNotForSale(){
-        return "searchList.xhtml";
+    public String searchByDesNotForSale(String nextPage){
+        return nextPage;
     }    
 
     //gets all items in database

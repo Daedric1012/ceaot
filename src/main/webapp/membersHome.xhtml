@@ -12,8 +12,8 @@
         <ui:define name="navigation">&gt;Members Home</ui:define>
         <ui:define name="content">
                 <h:panelGroup style="display: block; text-align:center">
-                <h:button class="button" value="Edit My Details" outcome="editMyDetails"/> <!-- TO DO change this outcome-->
-                <h:button class="button" value="List My Items" outcome="listMyItems"/> <!--TO DO change this outcome-->
+                <h:button class="button" value="Edit My Details" outcome="editMyDetails"/> 
+                <h:button class="button" value="List My Items" outcome="listMyItems"/> 
                 <h:button class="button" value="Add New Items" outcome="addNewItem"/>
                     <h:commandButton class="button" value="Sign Out" action="#{collectorController.logMeOut()}"/>
                     <br/><br/>
@@ -30,8 +30,8 @@
                     </h:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup style="display:block; text-align:center">
-                    <h:commandButton class="button" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum()}"/>
-                    <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes()}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search by Item Number" action="#{itemController.searchByNum('membersViewItem.xhtml')}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes('membersSearchList.xhtml')}"/>
 
                 </h:panelGroup>
             </h:form>  

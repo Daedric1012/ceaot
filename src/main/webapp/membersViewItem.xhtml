@@ -15,12 +15,12 @@
         </ui:define>
 
         <ui:define name="title">View Item</ui:define>
-        <ui:define name="navigation"><a href="membersHome.xhtml">Home Page</a>&gt;<a href="listMyItems.xhtml">List My Items</a> &gt;My Items</ui:define>
+        <ui:define name="navigation"><a href="membersHome.xhtml">Home Page</a>&gt;<a href="membersSearchList.xhtml">Search List</a> &gt;View Item</ui:define>
         <ui:define name="content">
             <div style="width: 100%">
                 <h:panelGroup style=" float: left;">
                     <h:button value="Home" class="button" outcome="membersHome"/>
-                    <h:button value="Back to List" class="button" outcome="listMyItems.xhtml"/>
+                    <h:button value="Back to List" class="button" outcome="membersSearchList.xhtml"/>
 
                 </h:panelGroup>
                 <br/>
@@ -40,7 +40,6 @@
                             <h:outputText value="#{itemController.singleItem.price}"  /><br/>
                             <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
 
-                            <h:commandButton value="Remove This Item" action="#{itemController.deleteItem(item)}"/>
 
                         </div>
                     </div>

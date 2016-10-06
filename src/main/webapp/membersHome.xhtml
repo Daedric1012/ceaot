@@ -11,14 +11,13 @@
         <ui:define name="title">Members Home</ui:define>
         <ui:define name="navigation">&gt;Members Home</ui:define>
         <ui:define name="content">
-            <h:panelGroup style="display: block; text-align:center">
+                <h:panelGroup style="display: block; text-align:center">
                 <h:button class="button" value="Edit My Details" outcome="editMyDetails"/> <!-- TO DO change this outcome-->
                 <h:button class="button" value="List My Items" outcome="listMyItems"/> <!--TO DO change this outcome-->
                 <h:button class="button" value="Add New Items" outcome="addNewItem"/>
-                <h:commandButton class="button" value="Sign Out" action="#{collectorController.logMeOut()}"/>
-                
-                <br/><br/>
-            </h:panelGroup>
+                    <h:commandButton class="button" value="Sign Out" action="#{collectorController.logMeOut()}"/>
+                    <br/><br/>
+                </h:panelGroup>
             <h:form>            
                 <h:panelGroup style="display:block; text-align:center;">
                     <h:inputText id="username" value="#{itemController.searchString}" style="width:300px; height:30px; margin: 6px 6px" p:placeholder="Search...." required="true"/>

@@ -20,17 +20,30 @@
                 <h:button value="For Sale" class="button" outcome="signIn"/>
                 <h:button value="Not For Sale" class="button" outcome="register"/>
             </h:panelGroup>
-            <h:panelGrid columns="2"  border="2">
+
+            <br/>
+            </div>
+            <div style="width: 100%; display: table; ">
                 <c:forEach items="#{itemController.items}" var="item">
-                    <h:graphicImage value="${item.photoLinks}" height="50"/>
-                    <h:panelGroup style="text-align: left">
-                        <h:outputText value="#{item.itemName}"/>
-                        <h:outputText value="#{item.itemDes}"/>
-                        <h:outputText value="#{item.price}"/>
-                        <h:outputText value="Item &#35; #{item.id}"/>
-                    </h:panelGroup>
+                    <hr/>
+                    <div style="width: 100%;height: 110px; display: table-row; ">
+                        <div style="width: 100px; height: 100px; float: left; border: 1px solid gray; margin: auto">
+                            <h:graphicImage value="${item.photoLinks}" style="max-width: 100%; max-height: 100%; display: block; margin: auto"/>
+                        </div>
+                        <div style="margin-left: 110px; height: 100px; text-align: left; ">
+
+                            <h:outputText value="#{item.itemName} "/><br/>
+                            <h:outputText style="color: blue" value="#{item.itemDes} "/><br/>
+                            <h:outputText value="#{item.price}"  /><br/>
+                            <h:outputText value="Item &#35; #{item.getStringID()}"/><br/>
+
+                            <h:button value="View Item" outcome="viewItem"/>
+
+                        </div>
+                    </div>
                 </c:forEach>
-            </h:panelGrid>
+            </div>
+
         </ui:define>
     </ui:composition>
 </html>

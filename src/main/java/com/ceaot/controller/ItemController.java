@@ -26,7 +26,7 @@ public class ItemController {
     // sets up the UserEJB
     @Inject
     private ItemEJB itemEJB;
-    
+
     //gives the item access to the user information
     @Inject
     private CollectorController usr;
@@ -67,8 +67,7 @@ public class ItemController {
         tempItem.setPrice(price);
         tempItem.setPaymentMethod(paymentMethod);
         try {
-            
-            ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your account has been created ", ""));
+
             //itemEJB.createItem(tempItem);
             owner.setItem(tempItem);
             itemEJB.updateCollector(owner);
@@ -109,15 +108,39 @@ public class ItemController {
         return "searchList.xhtml";
     }
 
-    //TO DO Search by description
+    //TO DO Search by description into a List<Items> items
     public String searchByDes(){
         return "searchList.xhtml";
-   }
+    }
+    
+    //TO DO Search by description into a List<Items> items, where items are For Sale
+    public String searchByDesForSale(){
+        return "searchList.xhtml";
+    }
+
+    //TO DO Search by description into a List<Items> items, where items are not for sale
+    public String searchByDesNotForSale(){
+        return "searchList.xhtml";
+    }    
 
     //gets all items in database
     public List<Item> getAllItems() {
         items = itemEJB.getAllItems();
         return items;
+    }
+    
+    // view single item from listMyItems.xhtml
+    public String viewMyItem(Item item) {
+        singleItem=item;
+        
+        return "viewMyItem.xhtml";
+    }
+    // TO DO
+    //Removes an Item from view without deleting it
+    public String markItemNotVisible(Item item) {
+        ctx.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Your item is no longer visible to others", ""));
+        return null;
     }
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters for the xhtml code to use.">

@@ -111,7 +111,7 @@ public class CollectorController implements Serializable {
         }
         return null;
     }
-    
+
     //when a collecter adds an item it's not updating this clt updates the user
     public String updateCltr(){
         cltr = collectorEJB.loggingIn(userName);
@@ -128,11 +128,20 @@ public class CollectorController implements Serializable {
         return "index.xhtml";
     }
 
-    //TO DO 
+    // Update the collectors details 
     public String updateCollector() {
+        collectorEJB.updateCollector(cltr);
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        // Clear out previous messages to avoid build up of messages on web pages
+        if (ctx.getMessages() != null) {
+            ctx.getMessages().remove();
+        }
+        // Add the new message
+        ctx.addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Your details have been updated","")); 
         return null;
     }
-
+    
     //<editor-fold defaultstate="collapsed" desc="used for password encryption">
     //compares the arrays created after the password is hashed.
     public boolean authenticate(String attempt, byte[] encryptedPassword, byte[] salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
@@ -237,7 +246,7 @@ public class CollectorController implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getPassword2() {
         return password;
     }

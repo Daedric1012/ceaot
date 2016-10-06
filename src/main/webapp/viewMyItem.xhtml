@@ -2,45 +2,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:composition template="layout.xhtml">
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam id="id" name="id" value="#{itemController.itemNum}" />
+                <f:viewAction action="#{itemController.getItem()}" />
+            </f:metadata>
+        </ui:define>
+
         <ui:define name="title">View Item</ui:define>
         <ui:define name="navigation"><a href="membersHome.xhtml">Home Page</a>&gt;<a href="listMyItems.xhtml">List My Items</a> &gt;My Items</ui:define>
         <ui:define name="content">
             <div style="width: 100%">
-            <h:panelGroup style=" float: left;">
-                <h:button value="New Search" class="button" outcome="index"/>
-                <h:button value="Back to List" class="button" outcome="listMyItems.xhtml"/>
+                <h:panelGroup style=" float: left;">
+                    <h:button value="New Search" class="button" outcome="index"/>
+                    <h:button value="Back to List" class="button" outcome="listMyItems.xhtml"/>
 
-            </h:panelGroup>
+                </h:panelGroup>
                 <br/>
             </div>
             <form>
-            <div style="width: 100%; display: table; ">
- 
+                <div style="width: 100%; display: table; ">
+
                     <hr/>
                     <div style="width: 100%;height: 300px; display: table-row; ">
-                    <div style="width: 300px; height: 300px; float: left; border: 1px solid gray; margin: auto">
-                        <h:graphicImage value="${itemController.singleItem.photoLinks}" style="max-width: 100%; max-height: 100%; display: block; margin: auto"/>
-                    </div>
-                    <div style="margin-left: 310px; height: 300px; text-align: left; ">
+                        <div style="width: 300px; height: 300px; float: left; border: 1px solid gray; margin: auto">
+                            <h:graphicImage value="${itemController.singleItem.photoLinks}" style="max-width: 100%; max-height: 100%; display: block; margin: auto"/>
+                        </div>
+                        <div style="margin-left: 310px; height: 300px; text-align: left; ">
 
-                       <h:outputText value="#{itemController.singleItem.itemName} "/><br/>
-                       <h:outputText style="color: blue" value="#{itemController.singleItem.itemDes} "/><br/>
-                       <h:outputText value="#{itemController.singleItem.price}"  /><br/>
-                        <h:outputText value="Item &#35; #{itemController.singleItem.getStringID()}"/><br/>
+                            <h:outputText value="#{itemController.singleItem.itemName} "/><br/>
+                            <h:outputText style="color: blue" value="#{itemController.singleItem.itemDes} "/><br/>
+                            <h:outputText value="#{itemController.singleItem.price}"  /><br/>
+                            <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
 
-                        <h:commandButton value="Remove This Item" action="#{itemController.markItemNotVisible(item)}"/>
+                            <h:commandButton value="Remove This Item" action="#{itemController.deleteItem(item)}"/>
 
+                        </div>
                     </div>
-                    </div>
-               
-        </div>
+
+                </div>
             </form>
-            
+
 
         </ui:define>
     </ui:composition>

@@ -31,11 +31,9 @@
 
                                 <h:outputText value="#{item.itemName} "/><br/>
                                 <h:outputText style="color: blue" value="#{item.itemDes} "/><br/>
-                                <h:outputText value="$+#{item.price}"  /><br/>
+                                <h:outputText value="$#{item.price}"  /><br/>
                                 <h:outputText value="Item &#35; #{item.getStringID()}"/><br/>
-
-                                <h:commandButton value="View Item" action="#{itemController.viewMyItem(item)}"/>
-
+                                <h:button value="View Item" outcome="viewMyItem.xhtml?id=#{item.id}"/>
                             </div>
                         </div>
                     </c:forEach>

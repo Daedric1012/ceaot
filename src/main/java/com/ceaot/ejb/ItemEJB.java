@@ -52,7 +52,7 @@ public class ItemEJB {
     }
     
     //get item by id
-    public Item getItemById(String id){
+    public Item getItemById(Long id){
         TypedQuery<Item> query = em.createNamedQuery("getItemById", Item.class);
         query.setParameter("id", id);
         Item itm = query.getSingleResult();

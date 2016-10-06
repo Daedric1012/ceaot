@@ -36,8 +36,10 @@
                             <h:outputText style="color: blue" value="#{item.itemDes} "/><br/>
                             <h:outputText value="#{item.price}"  /><br/>
                             <h:outputText value="Item &#35; #{item.getStringID()}"/><br/>
-
-                            <h:button value="View Item" outcome="viewItem"/>
+                            
+                            
+                            <h:commandButton class="button" value="View Item1" action="#{itemController.viewMyItem(item)}"/>
+                            <h:button value="View Item2" outcome="viewMyItem.xhtml?id=#{item.id}"/>
 
                         </div>
                     </div>

@@ -104,8 +104,13 @@ public class ItemController {
 
 
     public String searchByNum() {
-        singleItem = itemEJB.getItemById(itemNum.toString());
+        singleItem = itemEJB.getItemById(itemNum);
         return "searchList.xhtml";
+    }
+    
+    public String getItem(){
+        singleItem = itemEJB.getItemById(itemNum);
+        return "viewMyItem.xhtml";
     }
 
     //TO DO Search by description into a List<Items> items
@@ -129,18 +134,12 @@ public class ItemController {
         return items;
     }
     
-    // view single item from listMyItems.xhtml
-    public String viewMyItem(Item item) {
-        singleItem=item;
-        
-        return "viewMyItem.xhtml";
-    }
     // TO DO
     //Removes an Item from view without deleting it
-    public String markItemNotVisible(Item item) {
+    public String deleteItem(Item item) {
         ctx.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Your item is no longer visible to others", ""));
-        return null;
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Removed", ""));
+        return "membersHome.xhtml";
     }
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters for the xhtml code to use.">

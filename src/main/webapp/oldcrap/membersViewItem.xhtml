@@ -12,7 +12,7 @@
             window.history.back();
         }
     </script>
-
+    
     <ui:composition template="layout.xhtml">
         <ui:define name="metadata">
             <f:metadata>
@@ -22,17 +22,18 @@
         </ui:define>
 
         <ui:define name="title">View Item</ui:define>
-        <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;<a href="searchList.xhtml">Search List</a> &gt;View Item</ui:define>
+        <ui:define name="navigation"><a href="membersHome.xhtml">Home Page</a>&gt;<a href="membersSearchList.xhtml">Search List</a> &gt;View Item</ui:define>
         <ui:define name="content">
             <div style="width: 100%">
                 <h:panelGroup style=" float: left;">
-                    <h:button value="Home" class="button" outcome="index"/>
+                    <h:button value="Home" class="button" outcome="membersHome.xhtml"/>
                     <button class="button" onclick="goBack()">Back to List</button>
                 </h:panelGroup>
                 <br/>
             </div>
             <form>
                 <div style="width: 100%; display: table; ">
+
                     <hr/>
                     <div style="width: 100%;height: 300px; display: table-row; ">
                         <div style="width: 300px; height: 300px; float: left; border: 1px solid gray; margin: auto">
@@ -45,37 +46,31 @@
                                 <h:outputText value="#{itemController.singleItem.price}"  /><br/>
                                 <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
                                 <h:outputText value="Contact Owner: #{itemController.singleItem.owner.emailAddress}" /><br/>
-                                <c:if test="#{collectorController.loggedIn}">    
-                                    <c:if test="#{not itemController.singleItem.isForSale}">
-                                        <h:commandButton id="submit" class="button" value="Express intrest" action="#{itemController.expressIntrest(itemController.itemNum)}"/>
-                                    </c:if>
+                                <c:if test="#{not itemController.singleItem.isForSale}">
+                                    <h:commandButton id="submit" class="button" value="Express intrest" action="#{itemController.expressIntrest(itemController.itemNum)}"/>
                                 </c:if>
                             </h:form>
                         </div>
                     </div>
-                    
-                    <c:if test="#{collectorController.loggedIn}">
 
-                        <h:form>
-                            <h:outputText value="Add Comment"/><br/>
-                            <h:inputTextarea value="#{itemController.comment}" style="width: 250px" />
-                            <h:commandButton id="submit" class="button" value="Add Comment" action='#{itemController.addCommentToItem(itemController.itemNum)}' />
-                        </h:form>
-                        <br/>
-                        <h:outputText value="Comments: "/>
-                        <c:forEach items="#{itemController.singleItem.comments}" var="cmt">
-                            <hr/>
-                            <div style="width: 100%;height: 110px; display: table-row; ">
-                                <div style="margin-left: 110px; height: 100px; text-align: left; ">
+                    <h:form>
+                        <h:outputText value="Add Comment"/><br/>
+                        <h:inputTextarea value="#{itemController.comment}" style="width: 250px" />
+                        <h:commandButton id="submit" class="button" value="Add Comment" action='#{itemController.addCommentToItem(itemController.itemNum)}' />
+                    </h:form>
+                    <br/>
+                    <h:outputText value="Comments: "/>
+                    <c:forEach items="#{itemController.singleItem.comments}" var="cmt">
+                        <hr/>
+                        <div style="width: 100%;height: 110px; display: table-row; ">
+                            <div style="margin-left: 110px; height: 100px; text-align: left; ">
 
-                                    <h:outputText value="#{cmt.owner.username} "/><br/>
-                                    <h:outputText value="#{cmt.comment}"/>
+                                <h:outputText value="#{cmt.owner.username} "/><br/>
+                                <h:outputText value="#{cmt.comment}"/>
 
-                                </div>
                             </div>
-                        </c:forEach>
-                    </c:if>
-
+                        </div>
+                    </c:forEach>
                 </div>
             </form>
 
@@ -83,4 +78,3 @@
         </ui:define>
     </ui:composition>
 </html>
-

@@ -25,6 +25,9 @@ public class Comment implements Serializable {
     @ManyToOne
     private Collector owner;
     
+    @ManyToOne
+    private Item itm;
+    
     //length changed to 250 because 50 just isn't enough for a proper comment.
     @Column(length = 250, nullable = false)
     private String comment;
@@ -51,6 +54,14 @@ public class Comment implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+    
+    public void setItm(Item itm){
+        this.itm = itm;
+    }
+    
+    public Item getItm(){
+        return itm;
     }
     
     

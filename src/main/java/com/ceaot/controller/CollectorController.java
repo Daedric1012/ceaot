@@ -40,7 +40,7 @@ public class CollectorController implements Serializable {
     private String emailAddress;
     private String phoneNumber;
     private String password;
-    private String password2;
+    private String password2;//used to match passwords, not implimented yet
     private byte[] encryptedPass;
 
     //set only when user is logged in
@@ -73,7 +73,6 @@ public class CollectorController implements Serializable {
                 ctx.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to create new account " + e, ""));
                 return null;
-
             }
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your account has been created ", ""));
             loggedIn = true;
@@ -100,7 +99,7 @@ public class CollectorController implements Serializable {
             } else if (authenticate(password, cltr.getPassword(), cltr.getSalt())) {// checks the password matches.
                 loggedIn = true;
                 cltr.setLoggedIn(loggedIn);
-                return "membersHome.xhtml";
+                return "index.xhtml";
             } else {//if username is found but no password. same error message returned.
                 loggedIn = false;
                 ctx.addMessage(null,
@@ -110,6 +109,10 @@ public class CollectorController implements Serializable {
 
         }
         return null;
+    }
+    
+    public void refreshCltr(){
+        cltr = collectorEJB.loggingIn(cltr.getUsername());
     }
 
     //when a collecter adds an item it's not updating this clt updates the user
@@ -126,6 +129,7 @@ public class CollectorController implements Serializable {
         return "index.xhtml";
     }
     
+    //used to redirect the user back to the home page if they are not logged in
     public String amiloggedin(){
         if(!loggedIn){
             return "index.xhtml";

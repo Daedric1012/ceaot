@@ -10,12 +10,12 @@
         <ui:define name="title">Search List</ui:define>
         <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;Search List</ui:define>
         <ui:define name="content">
-            <h:panelGroup style="width: 75%; float: right;">
+                    <h:panelGroup style="display: block; text-align:center">
                 <h:button value="New Search" class="button" outcome="index"/>
-                <h:button value="Sign In" class="button" outcome="signIn"/>
-                <h:button value="Create an Account" class="button" outcome="register"/>
-            </h:panelGroup>
-            <h:panelGroup style="width: 50%; float: left;">
+                <c:if test="#{not collectorController.loggedIn}">
+                    <h:button value="Sign In" class="button" outcome="signIn"/>
+                    <h:button value="Create an Account" class="button" outcome="register"/>
+                </c:if>
                 <h:button value="All Items" class="button" outcome="index"/>
                 <h:button value="For Sale" class="button" outcome="signIn"/>
                 <h:button value="Not For Sale" class="button" outcome="register"/>
@@ -34,7 +34,7 @@
                             <h:outputText value="#{item.itemName} "/><br/>
                             <h:outputText style="color: blue" value="#{item.itemDes} "/><br/>
                             <h:outputText value="#{item.price}"  /><br/>
-                            <h:outputText value="Item &#35; #{item.getStringID()}"/><br/>
+                            <h:outputText value="Item &#35; #{item.id}"/><br/>
                             <h:button value="View Item" outcome="viewItem.xhtml?id=#{item.id}"/>
 
                         </div>

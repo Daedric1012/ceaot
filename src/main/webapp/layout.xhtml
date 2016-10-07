@@ -5,66 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <h:outputStylesheet name="/css/default.css"/>
         <title><ui:insert name="title">Default Title</ui:insert></title>
-        <style>
-
-            div.container {
-                margin: auto;
-                width: 80%;
-                min-height: 600px;
-                background: #efefef;
-                position: relative;
-
-
-
-            }
-
-            header, footer {
-                padding: 1em;
-                color: black;
-                background-color: lightcyan;
-                clear: left;
-                text-align: center;
-
-            }
-
-            nav {
-                float: top;
-                margin: 0;
-                padding: 1em;
-            }
-
-
-            nav a {
-                text-decoration: none;
-                color: black;
-            }
-
-            article {
-                width: 80%;
-                margin: auto;                
-                padding: 1em;
-                overflow: hidden;
-
-
-            }
-
-            .button {
-                background-color: #0033cc;
-                color: white;
-                border-radius:12px;
-                padding: 2px 6px;
-                width: 160px;
-                height: 40px;
-                margin: 4px 4px;
-
-            } 
-
-            .column {
-                width: 20%;   
-            }
-
-        </style>
     </h:head>
     <h:body>
         <f:view>

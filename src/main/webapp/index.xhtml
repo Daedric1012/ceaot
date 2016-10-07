@@ -2,18 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:composition template="layout.xhtml">
         <ui:define name="title">Home Page</ui:define>
         <ui:define name="navigation">&gt;Home Page</ui:define>
         <ui:define name="content">
+            <c:if test="#{collectorController.loggedIn}">            
+                <h:form>
+                    <h:panelGroup style="display: block; text-align:center">
+                        <h:button class="button" value="Edit My Details" outcome="editMyDetails"/> 
+                        <h:button class="button" value="List My Items" outcome="listMyItems"/> 
+                        <h:button class="button" value="Add New Items" outcome="addNewItem"/>
+                        <h:commandButton class="button" value="Sign Out" action="#{collectorController.logMeOut()}"/>
+                        <br/><br/>
+                    </h:panelGroup>
+                </h:form>
+            </c:if>
 
             <h:form>            
                 <h:panelGroup style="display:block; text-align:center;">
-                    <h:inputText id="username" value="#{itemController.searchString}" style="width:300px; height:30px; margin: 6px 6px" p:placeholder="Search...." required="true"/>
+                    <h:inputText id="username" value="#{itemController.searchString}" style="width:300px; height:30px; margin: 6px 6px" p:placeholder="Search...."/>
                     <h:selectOneMenu value="#{itemController.category}" style="height:35px">
                         <f:selectItem itemValue="All" itemLabel="All Categories" />
                         <f:selectItem itemValue="Auto" itemLabel="Auto" />
@@ -21,13 +33,18 @@
                         <f:selectItem itemValue="Dolls" itemLabel="Dolls" />
                         <f:selectItem itemValue="Models" itemLabel="Models" />
                     </h:selectOneMenu>
-                    <h:button class="button" style=" float:right; height: 45px" value="Sign In" outcome='signIn' />
+
+                    <c:if test="#{not collectorController.loggedIn}">
+                        <h:button class="button" style=" float:right; height: 45px" value="Sign In" outcome='signIn' />
+                    </c:if>
                 </h:panelGroup>
                 <br/>
                 <h:panelGroup style="display:block; text-align:center">
                     <h:button class="button" style="background-color: #990000" value="Search by Item Number" outcome="viewItem.xhtml?id=#{itemController.searchString}"/>
                     <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes('searchList.xhtml')}"/>
-                    <h:button class="button" style="float:right; height: 45px" value='Create Account' outcome='register'/>
+                    <c:if test="#{not collectorController.loggedIn}">
+                        <h:button class="button" style="float:right; height: 45px" value='Create Account' outcome='register'/>
+                    </c:if>
                 </h:panelGroup>
             </h:form> 
 

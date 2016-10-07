@@ -7,6 +7,7 @@ package com.ceaot.controller;
 
 import com.ceaot.ejb.ItemEJB;
 import com.ceaot.entity.Collector;
+import com.ceaot.entity.Comment;
 import com.ceaot.entity.Item;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -47,14 +48,53 @@ public class ItemController {
     private String price;
     private String paymentMethod;
 
+    //adding comments, text.
+    private String comment;
+
     FacesContext ctx = FacesContext.getCurrentInstance();
+
+    //add a comment.
+    public String addCommentToItem(String itemID) {
+        try {
+            singleItem = itemEJB.getItemById(Long.parseLong(itemID));
+            Comment cmt = new Comment();
+            cmt.setItm(singleItem);
+            //grabs collecter from session bean
+            cmt.setOwner(usr.getCltr());
+            cmt.setComment(comment);
+            singleItem.setComment(cmt);
+            itemEJB.updateItem(singleItem);
+        } catch (Exception e) {
+            ctx.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "fail: " + e, ""));
+        }
+        //basically refreshes the page
+        return "membersViewItem.xhtml?id=" + itemID;
+    }
+
+    //express intrest in the item.
+    public String expressIntrest(String itemID) {
+        singleItem = itemEJB.getItemById(Long.parseLong(itemID));
+        singleItem.addIntrest(usr.getCltr());
+        itemEJB.updateItem(singleItem);
+        //basically refreshes the page
+        return "membersViewItem.xhtml?id=" + itemID;
+    }
+
+    public String loseIntrest(String itemID) {
+        singleItem = itemEJB.getItemById(Long.parseLong(itemID));
+        singleItem.removeIntrest(usr.getCltr());
+        itemEJB.updateItem(singleItem);
+        //basically refreshes the page
+        return "membersViewItem.xhtml?id=" + itemID;
+    }
 
     //regester an item
     public String addItem() {
         owner = usr.getCltr();
         Item tempItem = new Item();
-        if(owner == null){
-            
+        if (owner == null) {
+
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "owner = null", ""));
             return null;
         }
@@ -83,17 +123,19 @@ public class ItemController {
     }
 
     //singleItem should be set before this!
-    public String updateItem() {
-        //owner or ID can't/shouldn't be changed so not here.
-        singleItem.setItemName(itemName);
-        singleItem.setItemDes(itemDes);
-        singleItem.setCategory(category);
-        singleItem.setIsForSale(isForSale);
-        singleItem.setPhotoLinks(photoLinks);
-        singleItem.setPrice(price);
-        singleItem.setPaymentMethod(paymentMethod);
+    public String updateItem(String id) {
+        Item tempItem = itemEJB.getItemById(itemNum);        
+        
+        tempItem.setItemName(itemName);
+        tempItem.setItemDes(itemDes);
+        tempItem.setCategory(category);
+        tempItem.setIsForSale(isForSale);
+        tempItem.setPhotoLinks(photoLinks);
+        tempItem.setPrice(price);
+        tempItem.setPaymentMethod(paymentMethod);
+        
         try {
-            itemEJB.updateItem(singleItem);
+            itemEJB.updateItem(tempItem);
             return null;//change to refresh page and add user feedabck
         } catch (Exception e) {
             ctx.addMessage(null,
@@ -101,51 +143,64 @@ public class ItemController {
             return null;//change to refresh the page.
         }
     }
+    
+    //used to fill the editing data
+    public void updating() {
+        itemName = singleItem.getItemName();
+        itemDes = singleItem.getItemDes();
+        category = singleItem.getCategory();
+        isForSale = singleItem.isIsForSale();
+        photoLinks = singleItem.getPhotoLinks();
+        price = singleItem.getPrice();
+        paymentMethod = singleItem.getPaymentMethod();
+    }
 
-
+    //stupid, not working.
     public String searchByNum(String nextPage) {
         singleItem = itemEJB.getItemById(itemNum);
-        return nextPage+"?id="+itemNum;
+        return nextPage + "?id=" + itemNum;
     }
-    
-    public String getItem(){
+
+    public String getItem() {
         singleItem = itemEJB.getItemById(itemNum);
         return null;
     }
 
     //TO DO Search by description into a List<Items> items
-    public String searchByDes(String nextPage){
+    public String searchByDes(String nextPage) {
         items = itemEJB.getAllItemsByDes(searchString, category);
         return nextPage;
     }
-    
+
     //TO DO Search by description into a List<Items> items, where items are For Sale
-    public String searchByDesForSale(String nextPage){
-        
+    public String searchByDesForSale(String nextPage) {
+
         return nextPage;
     }
-
-    //TO DO Search by description into a List<Items> items, where items are not for sale
-    public String searchByDesNotForSale(String nextPage){
-        
-        return nextPage;
-    }    
 
     //gets all items in database
     public List<Item> getAllItems() {
         items = itemEJB.getAllItems();
         return items;
     }
-    
+
     // TO DO
     //Removes an Item from view without deleting it
     public String deleteItem(Item item) {
         ctx.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Removed", ""));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Removed", ""));
         return "membersHome.xhtml";
     }
 
     //<editor-fold defaultstate="collapsed" desc="getters and setters for the xhtml code to use.">
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public Item getSingleItem() {
         return singleItem;
     }

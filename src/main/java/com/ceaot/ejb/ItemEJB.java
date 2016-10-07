@@ -27,7 +27,6 @@ import javax.persistence.TypedQuery;
 public class ItemEJB {
 
     //persistent unit setup
-
     @PersistenceContext(unitName = "ceaotPU")
     private EntityManager em;
     @Resource
@@ -63,11 +62,12 @@ public class ItemEJB {
 
     public List<Item> getAllItemsByDes(String des, String catagory) {
         List<Item> itemList;
+        //if no catagory selected
         if (catagory.equals("All")) {
             Query query = em.createNamedQuery("searchByDescription");
             query.setParameter("des", "%" + des + "%");
             itemList = query.getResultList();
-        }else{
+        }else{//add catagory to search results
             Query query = em.createNamedQuery("searchByDescriptionAndCatagory");
             query.setParameter("des", "%" + des + "%");
             query.setParameter("category", catagory);

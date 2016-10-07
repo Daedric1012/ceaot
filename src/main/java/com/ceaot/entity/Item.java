@@ -57,24 +57,16 @@ public class Item implements Serializable{
     //because im not deleting items just making them not show up anymore.
     private boolean removed = false;
     
+    //used to express intrest
     @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Collector> interestedIn;
     
     //comments will be retrived through the ItemEJB or the CollectorEJB as they don't need their own controller.
     @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OrderBy("id DESC")
     private List<Comment> comments;
 
     //getters and setters
-    
-    //used to provide string version of id
-    
-    public String getStringID(){
-        if(id == null){
-            return null;
-        }
-        String temp = Long.toString(id);
-        return temp;
-    }
     
     public Long getId() {
         return id;
@@ -157,19 +149,33 @@ public class Item implements Serializable{
     }
 
     public List<Collector> getInterestedIn() {
-        return interestedIn;
+        //the list is sent back in reverse to show the newest first.
+        List<Collector> tmp = interestedIn;
+        Collections.reverse(tmp);
+        return tmp;
     }
 
     public void setInterestedIn(List<Collector> interestedIn) {
         this.interestedIn = interestedIn;
     }
-
-    public List<Comment> getComments() {
-        return comments;
+    
+    public void addIntrest(Collector intrest){
+        this.interestedIn.add(intrest);
+    }
+    
+    public void removeIntrest(Collector intrest){
+        this.interestedIn.remove(intrest);
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    //sent reversed to show the newest first
+    public List<Comment> getComments() {
+        List<Comment> tmp = comments;
+        Collections.reverse(tmp);
+        return tmp;
+    }
+
+    public void setComment(Comment cmt) {
+        this.comments.add(cmt);
     }
 
     

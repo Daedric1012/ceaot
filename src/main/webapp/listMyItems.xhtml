@@ -11,6 +11,7 @@
         <ui:define name="metadata">
             <f:metadata>
                 <f:viewAction action="#{collectorController.amiloggedin()}" />
+                <f:viewAction action="#{collectorController.refreshCltr()}"/>
             </f:metadata>
         </ui:define>
         
@@ -19,10 +20,9 @@
         <ui:define name="content">
             <div style="width: 100%">
                 <h:panelGroup style=" float: left;">
-                    <h:button value="Home" class="button" outcome="membersHome"/>
-                    <h:button value="All Items" class="button" outcome="membersHome"/>
-                    <h:button value="For Sale" class="button" outcome="signIn"/>
-                    <h:button value="Not For Sale" class="button" outcome="register"/>
+                    <h:button value="Home" class="button" outcome="index.xhtml"/>
+                    <h:button value="For Sale" class="button" outcome="null"/>
+                    <h:button value="Not For Sale" class="button" outcome="null"/>
                 </h:panelGroup>
                 <br/>
             </div>
@@ -39,7 +39,7 @@
                                 <h:outputText value="#{item.itemName} "/><br/>
                                 <h:outputText style="color: blue" value="#{item.itemDes} "/><br/>
                                 <h:outputText value="$#{item.price}"  /><br/>
-                                <h:outputText value="Item &#35; #{item.getStringID()}"/><br/>
+                                <h:outputText value="Item &#35; #{item.id}"/><br/>
                                 <h:button value="View Item" outcome="viewMyItem.xhtml?id=#{item.id}"/>
                             </div>
                         </div>

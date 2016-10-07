@@ -105,26 +105,29 @@ public class ItemController {
 
     public String searchByNum(String nextPage) {
         singleItem = itemEJB.getItemById(itemNum);
-        return nextPage;
+        return nextPage+"?id="+itemNum;
     }
     
     public String getItem(){
         singleItem = itemEJB.getItemById(itemNum);
-        return "viewMyItem.xhtml";
+        return null;
     }
 
     //TO DO Search by description into a List<Items> items
     public String searchByDes(String nextPage){
+        items = itemEJB.getAllItemsByDes(searchString, category);
         return nextPage;
     }
     
     //TO DO Search by description into a List<Items> items, where items are For Sale
     public String searchByDesForSale(String nextPage){
+        
         return nextPage;
     }
 
     //TO DO Search by description into a List<Items> items, where items are not for sale
     public String searchByDesNotForSale(String nextPage){
+        
         return nextPage;
     }    
 

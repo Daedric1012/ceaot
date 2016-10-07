@@ -119,13 +119,19 @@ public class CollectorController implements Serializable {
     }
 
     //clears the session details. before deltion or on logout.
+    //for some reason have to press the sign out button twice to work.
     public String logMeOut() {
         loggedIn = false;
         cltr = null;
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        ctx.addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "You have logged out successfully", ""));
         return "index.xhtml";
+    }
+    
+    public String amiloggedin(){
+        if(!loggedIn){
+            return "index.xhtml";
+        }
+        //if logged in do nothing.
+        return null;
     }
 
     // Update the collectors details 

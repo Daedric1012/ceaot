@@ -21,13 +21,11 @@
                 <h:panelGroup style=" float: left;">
                     <h:button value="Home" class="button" outcome="index"/>
                     <h:button value="Back to List" class="button" outcome="searchList.xhtml"/>
-
                 </h:panelGroup>
                 <br/>
             </div>
             <form>
                 <div style="width: 100%; display: table; ">
-
                     <hr/>
                     <div style="width: 100%;height: 300px; display: table-row; ">
                         <div style="width: 300px; height: 300px; float: left; border: 1px solid gray; margin: auto">
@@ -39,8 +37,7 @@
                             <h:outputText style="color: blue" value="#{itemController.singleItem.itemDes} "/><br/>
                             <h:outputText value="#{itemController.singleItem.price}"  /><br/>
                             <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
-
-
+                            <h:outputText value="Owner #{itemController.singleItem.owner.emailAddress}" /><br/>
                         </div>
                     </div>
 

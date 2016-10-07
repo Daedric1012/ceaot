@@ -19,7 +19,7 @@
         <ui:define name="content">
             <div style="width: 100%">
                 <h:panelGroup style=" float: left;">
-                    <h:button value="Home" class="button" outcome="membersHome"/>
+                    <h:button value="Home" class="button" outcome="membersHome.xhtml"/>
                     <h:button value="Back to List" class="button" outcome="membersSearchList.xhtml"/>
 
                 </h:panelGroup>
@@ -39,8 +39,6 @@
                             <h:outputText style="color: blue" value="#{itemController.singleItem.itemDes} "/><br/>
                             <h:outputText value="#{itemController.singleItem.price}"  /><br/>
                             <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
-
-
                         </div>
                     </div>
 

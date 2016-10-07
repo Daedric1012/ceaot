@@ -9,11 +9,12 @@
     <ui:composition template="layout.xhtml">
         <ui:define name="metadata">
             <f:metadata>
+                <f:viewAction action="#{collectorController.amiloggedin()}" />
                 <f:viewParam id="id" name="id" value="#{itemController.itemNum}" />
                 <f:viewAction action="#{itemController.getItem()}" />
             </f:metadata>
         </ui:define>
-
+        
         <ui:define name="title">View Item</ui:define>
         <ui:define name="navigation"><a href="membersHome.xhtml">Home Page</a>&gt;<a href="listMyItems.xhtml">List My Items</a> &gt;My Items</ui:define>
         <ui:define name="content">

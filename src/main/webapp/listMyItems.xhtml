@@ -2,18 +2,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:composition template="layout.xhtml">
+        
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewAction action="#{collectorController.amiloggedin()}" />
+            </f:metadata>
+        </ui:define>
+        
         <ui:define name="title">List My Items</ui:define>
         <ui:define name="navigation"><a href="membersHome.xhtml">Home Page</a>&gt;My Items</ui:define>
         <ui:define name="content">
             <div style="width: 100%">
                 <h:panelGroup style=" float: left;">
                     <h:button value="Home" class="button" outcome="membersHome"/>
-                    <h:button value="All Items" class="button" outcome="index"/>
+                    <h:button value="All Items" class="button" outcome="membersHome"/>
                     <h:button value="For Sale" class="button" outcome="signIn"/>
                     <h:button value="Not For Sale" class="button" outcome="register"/>
                 </h:panelGroup>

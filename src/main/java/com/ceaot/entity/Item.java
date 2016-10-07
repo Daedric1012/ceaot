@@ -19,10 +19,14 @@ import java.util.*;
     @NamedQuery(name = "FindItemsByCollector", query = "SELECT c FROM Item c WHERE c.owner = :uname AND c.removed = false"),
     //find items for sale
     @NamedQuery(name = "ItemsForSale", query = "SELECT c FROM Item c WHERE c.isForSale = true AND c.removed = false"),
-    //find items that fit into a category
-    @NamedQuery(name = "itemByCatagory", query = "SELECT c FROM Item c WHERE c.category = :category AND c.removed = false"),
+    //find all items that fit into a category
+    @NamedQuery(name = "allItemsByCatagory", query = "SELECT c FROM Item c WHERE c.category = :category AND c.removed = false"),
     //get all items
-    @NamedQuery(name = "getAllItems", query = "SELECT c FROM Item c"),
+    @NamedQuery(name = "getAllItems", query = "SELECT c FROM Item c WHERE c.removed = false"),
+    
+    @NamedQuery(name = "searchByDescription", query = "SELECT c FROM Item c WHERE c.removed = false AND UPPER(c.itemDes) LIKE UPPER(:des)"),
+    
+    @NamedQuery(name = "searchByDescriptionAndCatagory", query = "SELECT c FROM Item c WHERE c.removed = false AND UPPER(c.itemDes) LIKE UPPER(:des) AND  c.category = :category"),
     //get item by id
     @NamedQuery(name = "getItemById", query = "SELECT c FROM Item c WHERE c.id = :id AND c.removed = false")
 })

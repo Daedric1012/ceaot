@@ -40,11 +40,13 @@
                         </div>
                         <div style="margin-left: 310px; height: 300px; text-align: left; ">
                             <h:form>
-                                <h:outputText value="#{itemController.singleItem.itemName} "/><br/>
+                                <h:outputText value="Item Name:"/>
+                                <h:outputText value="#{itemController.singleItem.itemName}"/><br/>
                                 <h:outputText style="color: blue" value="#{itemController.singleItem.itemDes} "/><br/>
                                 <h:outputText value="#{itemController.singleItem.price}"  /><br/>
                                 <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
-                                <h:outputText value="Contact Owner: #{itemController.singleItem.owner.emailAddress}" /><br/>
+                                <h:link value="#{itemController.singleItem.owner.username}" outcome="viewSeller.xhtml?id=#{itemController.singleItem.owner.id}"/>
+                                <h:outputText value="Email Owner: #{itemController.singleItem.owner.emailAddress}" /><br/>
                                 <c:if test="#{collectorController.loggedIn}">    
                                     <c:if test="#{not itemController.singleItem.isForSale}">
                                         <h:commandButton id="submit" class="button" value="Express intrest" action="#{itemController.expressIntrest(itemController.itemNum)}"/>

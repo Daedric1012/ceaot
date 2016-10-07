@@ -40,7 +40,6 @@
                 </h:panelGroup>
                 <br/>
                 <h:panelGroup style="display:block; text-align:center">
-                    <h:button class="button" style="background-color: #990000" value="Search by Item Number" outcome="viewItem.xhtml?id=#{itemController.searchString}"/>
                     <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes('searchList.xhtml')}"/>
                     <c:if test="#{not collectorController.loggedIn}">
                         <h:button class="button" style="float:right; height: 45px" value='Create Account' outcome='register'/>

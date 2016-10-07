@@ -166,7 +166,6 @@ public class ItemController {
         return null;
     }
 
-    //TO DO Search by description into a List<Items> items
     public String searchByDes(String nextPage) {
         items = itemEJB.getAllItemsByDes(searchString, category);
         return nextPage;
@@ -174,7 +173,6 @@ public class ItemController {
 
     //TO DO Search by description into a List<Items> items, where items are For Sale
     public String searchByDesForSale(String nextPage) {
-
         return nextPage;
     }
 
@@ -184,7 +182,6 @@ public class ItemController {
         return items;
     }
 
-    // TO DO
     //Removes an Item from view without deleting it
     public String deleteItem(Item item) {
         ctx.addMessage(null,

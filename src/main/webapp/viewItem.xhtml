@@ -45,7 +45,8 @@
                                 <h:outputText style="color: blue" value="#{itemController.singleItem.itemDes} "/><br/>
                                 <h:outputText value="#{itemController.singleItem.price}"  /><br/>
                                 <h:outputText value="Item &#35; #{itemController.itemNum}"/><br/>
-                                <h:link value="#{itemController.singleItem.owner.username}" outcome="viewSeller.xhtml?id=#{itemController.singleItem.owner.id}"/>
+                                <h:outputText value="Seller: "/>
+                                <h:link value="#{itemController.singleItem.owner.username}" outcome="viewSeller.xhtml?id=#{itemController.singleItem.owner.id}"/><br/>
                                 <h:outputText value="Email Owner: #{itemController.singleItem.owner.emailAddress}" /><br/>
                                 <c:if test="#{collectorController.loggedIn}">    
                                     <c:if test="#{not itemController.singleItem.isForSale}">
@@ -71,17 +72,14 @@
                                 <div style="margin-left: 110px; height: 100px; text-align: left; ">
 
                                     <h:outputText value="#{cmt.owner.username} "/><br/>
-                                    <h:outputText value="#{cmt.comment}"/>
+                                    <h:outputText value="#{cmt.comment}" style="color: blue"/>
 
                                 </div>
                             </div>
                         </c:forEach>
                     </c:if>
-
                 </div>
             </form>
-
-
         </ui:define>
     </ui:composition>
 </html>

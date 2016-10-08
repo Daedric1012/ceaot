@@ -1,16 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <ui:composition template="layout.xhtml">
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:viewParam id="id" name="id" value="#{sellerController.sellerID}" />
+                <f:viewAction action="#{sellerController.updateSeller()}" />
+            </f:metadata>
+        </ui:define>
+
+        <ui:define name="title">View Seller</ui:define>
+        <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;<a href="searchList.xhtml">
+                Search List</a> &gt;<a href="viewItem.xhtml">View Item</a>&gt;View Seller</ui:define>
+        <ui:define name="content">
+            <div style="width: 100%">
+                <h:panelGroup style=" float: left;">
+                    <h:button value="Home" class="button" outcome="index"/>
+                    <button class="button" onclick="goBack()">Back to Item</button>
+                </h:panelGroup>
+                <br/>
+            </div>
+            <article style="width: 100%; height: 30px"><h3>Comments about #{sellerController.seller.username}</h3></article>
+            <div style="width: 100%; display: table; ">
+                <hr/>
+                <c:forEach items="#{sellerController.seller.commentsAboutMe}" var="comment">
+                    <div style="width: 100%;height: 20px; display: table-row; ">
+
+                        <nav style="margin-left: 20px; text-align: left; ">
+                            <h:outputText value="#{comment.owner.username}"/>
+                        </nav>
+                        <article style=" width: 100%; margin-left: 20px; height: 20px">
+                            <h:outputText value="#{comment.comment}" style="color: blue"/>
+                        </article>
+                        <hr/>
+                    </div>
+                </c:forEach>
+                <c:if test="#{collectorController.loggedIn}">
+                    <h:form>
+                        <h:outputText value="Add Comment"/><br/>
+                        <h:inputTextarea value="#{sellerController.comment}" style="width: 250px" />
+                        <h:commandButton id="submit"  value="Add Comment" action='#{sellerController.addComment(sellerController.sellerID)}' />
+                    </h:form>
+                </c:if>
+            </div>
+        </ui:define>
+    </ui:composition>
 </html>

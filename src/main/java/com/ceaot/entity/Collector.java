@@ -83,6 +83,10 @@ public class Collector implements Serializable {
         this.commentsAboutMe = commentsAboutMe;
     }
     
+    public void addCommentsAboutMe(Comment cmt){
+        this.commentsAboutMe.add(cmt);
+    }
+    
     public String getUsername() {
         return username;
     }

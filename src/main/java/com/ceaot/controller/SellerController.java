@@ -22,7 +22,7 @@ import javax.inject.Named;
 public class SellerController implements Serializable {
     
     private Collector seller;
-    private String sellerID;
+    private String sellerUname;
     private String comment;
     
     // sets up the CollectorEJB
@@ -31,7 +31,7 @@ public class SellerController implements Serializable {
     
     public void updateSeller(){
         //grabs the user based off ID
-        seller = collectorEJB.loggingIn(sellerID);
+        seller = collectorEJB.loggingIn(sellerUname);
     }
     
     public String addComment(String sellerID){
@@ -56,12 +56,12 @@ public class SellerController implements Serializable {
         this.seller = seller;
     }
 
-    public String getSellerID() {
-        return sellerID;
+    public String getSellerUname() {
+        return sellerUname;
     }
 
-    public void setSellerID(String sellerID) {
-        this.sellerID = sellerID;
+    public void setSellerUname(String sellerUn) {
+        this.sellerUname = sellerUn;
     }
 
     public String getComment() {

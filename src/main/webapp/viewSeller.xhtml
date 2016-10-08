@@ -16,7 +16,7 @@
     <ui:composition template="layout.xhtml">
         <ui:define name="metadata">
             <f:metadata>
-                <f:viewParam id="id" name="id" value="#{sellerController.sellerID}" />
+                <f:viewParam id="id" name="id" value="#{sellerController.sellerUname}" />
                 <f:viewAction action="#{sellerController.updateSeller()}" />
             </f:metadata>
         </ui:define>
@@ -32,6 +32,8 @@
                 </h:panelGroup>
                 <br/>
             </div>
+            <h:outputText value="Username: "/>
+            <h:outputText value="#{sellerController.seller.username}"/>
             <article style="width: 100%; height: 30px"><h3>Comments about #{sellerController.seller.username}</h3></article>
             <div style="width: 100%; display: table; ">
                 <hr/>

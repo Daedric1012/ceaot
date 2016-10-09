@@ -10,9 +10,7 @@
         <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;Create Account</ui:define>
         <ui:define name="content">
             <div style="text-align: center; display: block; width: 100%">
-
                 <h:form> 
-
                     <h:panelGrid style="margin: auto" id="panel" columns="2" border="0" cellpadding="10" cellspacing="1"  >
                         <f:facet name="header">
                             <h:outputText value="Enter your details and create your account"/>
@@ -29,7 +27,7 @@
                         <h:inputText value="#{collectorController.phoneNumber}" required="true" style="width: 250px" />
                         <h:outputLabel value="Password" />
                         <h:inputSecret value="#{collectorController.password}" required="true" style="width: 250px">
-                        <f:validateRegex pattern="[a-zA-Z0-9\p{Punct}\s]+" /><f:validateLength maximum="10"/>
+                            <f:validateRegex pattern="[a-zA-Z0-9\p{Punct}\s]+" /><f:validateLength maximum="10"/>
                         </h:inputSecret>
                         <h:outputLabel value="Re-enter password" />
                         <h:inputSecret value="#{collectorController.password2}"  style="width: 250px" />

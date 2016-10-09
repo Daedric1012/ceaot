@@ -28,68 +28,70 @@
             </div>
             <form>
                 <div style="width: 100%; display: table; ">
-
                     <hr/>
-                    <div style="width: 100%;height: 300px; display: table-row; ">
+                    <div style="width: 100%;height: 330px; display: table-row; ">
                         <div style="width: 300px; height: 300px; float: left; border: 1px solid gray; margin: auto">
                             <h:graphicImage value="${itemController.singleItem.photoLinks}" style="max-width: 100%; max-height: 100%; display: block; margin: auto"/>
                         </div>
-                        <div style="margin-left: 310px; height: 300px; text-align: left; ">
+                        <div style="margin-left: 310px; height: 320px; text-align: left; ">
                             <h:form>
-                                <h:outputLabel value="Item Name" /><br/>
-                                <h:inputText value="#{itemController.itemName}" required="true" style="width: 250px" /><br/>
-                                <h:outputLabel value="Item Description" /><br/>
-                                <h:inputText value="#{itemController.itemDes}" required="true" style="width: 250px"/><br/>
-                                <h:outputLabel value="Catergory" /><br/>
-                                <h:selectOneMenu value="#{itemController.category}" >
-                                    <f:selectItem itemValue="All" itemLabel="Select One" />
-                                    <f:selectItem itemValue="Auto" itemLabel="Auto" />
-                                    <f:selectItem itemValue="Antiques" itemLabel="Antiques" />
-                                    <f:selectItem itemValue="Dolls" itemLabel="Dolls" />
-                                    <f:selectItem itemValue="Models" itemLabel="Models" />
-                                </h:selectOneMenu><br/>
-                                <h:outputLabel value="Photo " /><br/>
-                                <h:inputText value="#{itemController.photoLinks}" required="true" style="width: 250px" /><br/>
-                                <h:outputLabel value="Item is for sale" /><br/>
-                                <h:selectBooleanCheckbox onclick="renderFields" id="forSale" style="width:20px; height: 20px" value="#{itemController.isForSale}"/><br/>
-                                <h:outputLabel value="Price" /><br/>
-                                <h:inputText value="#{itemController.price}"  /><br/>
-                                <h:outputLabel value="Payment Method" /><br/>
-                                <h:inputText value="#{itemController.paymentMethod}"  style="width: 250px" /><br/>
+                                <h:panelGrid style="margin-left: 30px" id="myitem" columns="2" border="0" cellpadding="5" cellspacing="0"  >
+                                    <f:facet name="header">
+                                        <h:outputText value="Update Item Details"/>
+                                    </f:facet>
+                                    <h:outputLabel value="Item Name:" />
+                                    <h:inputText value="#{itemController.itemName}" required="true" style="width: 350px" />
+                                    <h:outputLabel value="Item Description:&#160;" />
+                                    <h:inputText value="#{itemController.itemDes}" required="true" style="width: 350px"/>
+                                    <h:outputLabel value="Catergory:&#160;" />
+                                    <h:selectOneMenu value="#{itemController.category}" style="width: 150px">
+                                        <f:selectItem itemValue="All" itemLabel="Select One" />
+                                        <f:selectItem itemValue="Auto" itemLabel="Auto" />
+                                        <f:selectItem itemValue="Antiques" itemLabel="Antiques" />
+                                        <f:selectItem itemValue="Dolls" itemLabel="Dolls" />
+                                        <f:selectItem itemValue="Models" itemLabel="Models" />
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="Photo Link:&#160; " />
+                                    <h:inputText value="#{itemController.photoLinks}" required="true" style="width: 350px" />
+                                    <h:outputLabel value="Item is for sale:&#160;" />
+                                    <h:selectBooleanCheckbox id="forSale" style="width:20px; height: 20px" value="#{itemController.isForSale}"/>
+                                    <h:outputLabel value="Price:&#160;" />
+                                    <h:inputText value="#{itemController.price}"  />
+                                    <h:outputLabel value="Payment Method:&#160;" />
+                                    <h:inputText value="#{itemController.paymentMethod}"  style="width: 200px" />
+                                    <h:outputText value="Delete Item:&#160;"/>
+                                    <h:selectBooleanCheckbox id="removed" style="width:20px; height: 20px" value="#{itemController.removed}"/>                                
+                                </h:panelGrid>
 
-                                <h:commandButton value="Remove This Item" action="#{itemController.deleteItem(item)}"/>
-                                <h:commandButton value="update Item" action="#{itemController.updateItem(itemController.singleItem)}"/>
+                                <h:commandButton value="update Item" class="button" style="margin-left: 60px; height: 25px" action="#{itemController.updateItem(itemController.singleItem)}"/>
                             </h:form>
                         </div>
+                    </div>                  
+                    <div style="width: 100%">
+                        <h:outputText value="Collectors interested in this item" style="font-weight: bold; font-size: 20px"/>
                     </div>
-                    <h:outputText value="Interested"/>
+                    <hr/>
                     <c:forEach items="#{itemController.singleItem.interestedIn}" var="cltr">
-                        <hr/>
-                        <div style="width: 100%;height: 110px; display: table-row; ">
-                            <div style="margin-left: 110px; height: 100px; text-align: left; ">
-
-                                <h:outputText value="#{cltr.firstName} #{cltr.lastName}"/><br/>
-                                <h:outputText value="#{cltr.emailAddress}"/>
-
+                        <div style="width: 100%;height: 30px; display: table-row; ">
+                            <div style="margin-left: 100px; height: 30px; text-align: left">
+                                <h:outputText value="#{cltr.firstName} #{cltr.lastName}" class="listFontBold"/><br/>
+                                <h:outputText value="#{cltr.emailAddress}"/>                             
                             </div>
                         </div>
                     </c:forEach>
-                    <h:outputText value="Comments"/>
+                    <br/>                   
+                    <h:outputText value="Comments" style="font-weight: bold; font-size: 20px"/>
+                    <hr/>
                     <c:forEach items="#{itemController.singleItem.comments}" var="cmt">
-                        <hr/>
-                        <div style="width: 100%;height: 110px; display: table-row; ">
-                            <div style="margin-left: 110px; height: 100px; text-align: left; ">
-
-                                <h:outputText value="#{cmt.owner.username} "/><br/>
+                        <div style="width: 100%;height: 50px; display: table-row; ">
+                            <div style="margin-left: 110px; height: 50px; text-align: left; ">
+                                <h:outputText value="#{cmt.owner.username} " class="listFontBold"/><br/>
                                 <h:outputText value="#{cmt.comment}"/>
-
                             </div>
                         </div>
                     </c:forEach>
                 </div>
             </form>
-
-
         </ui:define>
     </ui:composition>
 </html>

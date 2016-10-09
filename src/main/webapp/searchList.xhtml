@@ -10,17 +10,13 @@
         <ui:define name="title">Search List</ui:define>
         <ui:define name="navigation"><a href="index.xhtml">Home Page</a>&gt;Search List</ui:define>
         <ui:define name="content">
-                    <h:panelGroup style="display: block; text-align:center">
+            <h:panelGroup style="display: block; text-align:left">
                 <h:button value="New Search" class="button" outcome="index"/>
                 <c:if test="#{not collectorController.loggedIn}">
                     <h:button value="Sign In" class="button" outcome="signIn"/>
                     <h:button value="Create an Account" class="button" outcome="register"/>
                 </c:if>
-                <h:button value="All Items" class="button" outcome="index"/>
-                <h:button value="For Sale" class="button" outcome="signIn"/>
-                <h:button value="Not For Sale" class="button" outcome="register"/>
             </h:panelGroup>
-
             <br/>
             <div style="width: 100%; display: table; ">
                 <c:forEach items="#{itemController.items}" var="item">
@@ -30,18 +26,16 @@
                             <h:graphicImage value="${item.photoLinks}" style="max-width: 100%; max-height: 100%; display: block; margin: auto"/>
                         </div>
                         <div style="margin-left: 110px; height: 100px; text-align: left; ">
-
-                            <h:outputText value="#{item.itemName} "/><br/>
-                            <h:outputText style="color: blue" value="#{item.itemDes} "/><br/>
-                            <h:outputText value="#{item.price}"  /><br/>
-                            <h:outputText value="Item &#35; #{item.id}"/><br/>
-                            <h:button value="View Item" outcome="viewItem.xhtml?id=#{item.id}"/>
-
+                            <h:outputText class="listFontBold" value="#{item.itemName}"/><br/>
+                            <h:outputText class="listFont" value="#{item.itemDes} "/><br/>
+                            <h:outputText class="listFontBold" value="For Sale: $#{item.price}"  rendered="#{item.isForSale}"/>
+                            <h:outputText class="listFontBold" value="Display Only" rendered="#{not item.isForSale}"/><br/><br/>
+                            <h:outputText value="Item &#35; #{item.id} &#160;"/>
+                            <h:button value="View Item" class="button" style="height: 25px" outcome="viewItem.xhtml?id=#{item.id}"/>
                         </div>
                     </div>
                 </c:forEach>
             </div>
-
         </ui:define>
     </ui:composition>
 </html>

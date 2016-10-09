@@ -78,7 +78,7 @@ public class CollectorController implements Serializable {
             loggedIn = true;
             cltr = c;
             cltr.setLoggedIn(loggedIn);
-            return "membersHome.xhtml";
+            return "index.xhtml";
 
             //encryption throws these erros so it contains all this.
         } catch (InvalidKeySpecException | NoSuchAlgorithmException ex) {

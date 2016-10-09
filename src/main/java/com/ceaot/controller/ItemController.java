@@ -47,6 +47,7 @@ public class ItemController {
     private String photoLinks;
     private String price;
     private String paymentMethod;
+    private boolean removed;
 
     //adding comments, text.
     private String comment;
@@ -114,7 +115,7 @@ public class ItemController {
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "New Item Added", ""));
             usr.updateCltr();
-            return "membersHome.xhtml";
+            return "listMyItems.xhtml";
         } catch (Exception e) {
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed", ""));
@@ -133,10 +134,12 @@ public class ItemController {
         tempItem.setPhotoLinks(photoLinks);
         tempItem.setPrice(price);
         tempItem.setPaymentMethod(paymentMethod);
+        tempItem.setRemoved(removed);
         
         try {
             itemEJB.updateItem(tempItem);
-            return null;//change to refresh page and add user feedabck
+            usr.updateCltr();
+            return "listMyItems.xhtml";//change to refresh page and add user feedabck
         } catch (Exception e) {
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "update failed", ""));
@@ -327,4 +330,18 @@ public class ItemController {
     }
 
     //</editor-fold>
+
+    /**
+     * @return the removed
+     */
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    /**
+     * @param removed the removed to set
+     */
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
+    }
 }

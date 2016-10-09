@@ -22,31 +22,28 @@
                     </h:panelGroup>
                 </h:form>
             </c:if>
-
             <h:form>            
                 <h:panelGroup style="display:block; text-align:center;">
                     <h:inputText id="username" value="#{itemController.searchString}" style="width:300px; height:30px; margin: 6px 6px" p:placeholder="Search...."/>
-                    <h:selectOneMenu value="#{itemController.category}" style="height:35px">
+                    <h:selectOneMenu value="#{itemController.category}" style="height:35px; width: 150px">
                         <f:selectItem itemValue="All" itemLabel="All Categories" />
                         <f:selectItem itemValue="Auto" itemLabel="Auto" />
                         <f:selectItem itemValue="Antiques" itemLabel="Antiques" />
                         <f:selectItem itemValue="Dolls" itemLabel="Dolls" />
                         <f:selectItem itemValue="Models" itemLabel="Models" />
                     </h:selectOneMenu>
-
                     <c:if test="#{not collectorController.loggedIn}">
                         <h:button class="button" style=" float:right; height: 45px" value="Sign In" outcome='signIn' />
                     </c:if>
                 </h:panelGroup>
                 <br/>
                 <h:panelGroup style="display:block; text-align:center">
-                    <h:commandButton class="button" style="background-color: #990000" value="Search by Description" action="#{itemController.searchByDes('searchList.xhtml')}"/>
+                    <h:commandButton class="button" style="background-color: #990000" value="Search" action="#{itemController.searchByDes('searchList.xhtml')}"/>
                     <c:if test="#{not collectorController.loggedIn}">
                         <h:button class="button" style="float:right; height: 45px" value='Create Account' outcome='register'/>
                     </c:if>
                 </h:panelGroup>
             </h:form> 
-
         </ui:define>
     </ui:composition>
 </html>

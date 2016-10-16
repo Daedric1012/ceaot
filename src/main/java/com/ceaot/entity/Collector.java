@@ -27,13 +27,13 @@ public class Collector implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // uniqe key for each user and used as FK in other tables
 
-    @Column(length = 10, nullable = false, unique = true)
+    @Column(length = 25, nullable = false, unique = true)
     private String username;
     
-    @Column(length = 10, nullable = false)
+    @Column(length = 25, nullable = false)
     private String firstName;
     
-    @Column(length = 10, nullable = false)
+    @Column(length = 25, nullable = false)
     private String lastName;
 
     //@Column(nullable = false)

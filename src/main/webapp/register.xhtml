@@ -27,7 +27,7 @@
                         <h:inputText value="#{collectorController.phoneNumber}" required="true" style="width: 250px" />
                         <h:outputLabel value="Password" />
                         <h:inputSecret value="#{collectorController.password}" required="true" style="width: 250px">
-                            <f:validateRegex pattern="[a-zA-Z0-9\p{Punct}\s]+" /><f:validateLength maximum="10"/>
+                            <f:validateRegex pattern="[a-zA-Z0-9\p{Punct}\s]+" /><f:validateLength maximum="25"/>
                         </h:inputSecret>
                         <h:outputLabel value="Re-enter password" />
                         <h:inputSecret value="#{collectorController.password2}"  style="width: 250px" />
